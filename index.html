@@ -66,7 +66,16 @@
         </div>
 
         <!-- Desktop Navigation Items -->
-        <nav class="hidden md:flex items-center space-x-8 text-sm font-medium text-slate-600">
+        <nav class="hidden md:flex items-center space-x-6 text-sm font-medium text-slate-600">
+          <button 
+            type="button" 
+            id="navAllJobsBtn" 
+            class="inline-flex items-center gap-1.5 text-brand-700 bg-brand-50 hover:bg-brand-100 border border-brand-200/70 px-3 py-1.5 rounded-lg font-semibold transition"
+          >
+            <i data-lucide="layout-grid" class="w-4 h-4 text-brand-600"></i>
+            <span>Browse All Roles</span>
+            <span class="text-[10px] bg-brand-200 text-brand-900 px-1.5 py-0.5 rounded-full font-bold">8</span>
+          </button>
           <a href="#overview" class="hover:text-brand-600 transition-colors">Overview</a>
           <a href="#responsibilities" class="hover:text-brand-600 transition-colors">Responsibilities</a>
           <a href="#qualifications" class="hover:text-brand-600 transition-colors">Qualifications</a>
@@ -75,6 +84,14 @@
 
         <!-- Right action / simulated badge -->
         <div class="flex items-center gap-3">
+          <button 
+            type="button" 
+            id="mobileAllJobsBtn" 
+            class="md:hidden inline-flex items-center gap-1 text-xs font-semibold px-2.5 py-1.5 rounded-lg bg-brand-50 text-brand-700 border border-brand-200"
+          >
+            <i data-lucide="layout-grid" class="w-3.5 h-3.5"></i>
+            <span>Jobs (8)</span>
+          </button>
           <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-emerald-50 text-emerald-700 border border-emerald-200">
             <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
             Hiring Actively
@@ -90,13 +107,80 @@
   <!-- Main Container -->
   <main class="flex-1 max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-8">
 
-    <!-- Breadcrumb Navigation -->
-    <nav class="flex items-center space-x-2 text-xs sm:text-sm text-slate-500 mb-6" aria-label="Breadcrumb">
-      <a href="#" class="hover:text-slate-800 transition">Careers</a>
-      <i data-lucide="chevron-right" class="w-4 h-4 text-slate-400"></i>
-      <a href="#" class="hover:text-slate-800 transition">Security Engineering</a>
-      <i data-lucide="chevron-right" class="w-4 h-4 text-slate-400"></i>
-      <span class="text-slate-800 font-medium truncate">Systems &amp; Security Research Engineer</span>
+    <!-- Interactive Breadcrumb Navigation -->
+    <nav class="flex items-center flex-wrap gap-1.5 text-xs sm:text-sm text-slate-500 mb-6" aria-label="Breadcrumb">
+      
+      <!-- 1. Careers Link (Opens Full Directory) -->
+      <button 
+        type="button" 
+        id="breadcrumbCareersBtn" 
+        class="inline-flex items-center gap-1.5 font-semibold text-brand-700 hover:text-brand-900 bg-brand-50 hover:bg-brand-100 border border-brand-200/60 px-2.5 py-1 rounded-lg transition group"
+        title="Explore all departments and jobs"
+      >
+        <i data-lucide="briefcase" class="w-3.5 h-3.5 text-brand-600 group-hover:scale-105 transition-transform"></i>
+        <span>Careers</span>
+        <span class="text-[10px] bg-brand-200 text-brand-800 px-1.5 py-0.2 rounded-full font-bold">8</span>
+      </button>
+
+      <i data-lucide="chevron-right" class="w-4 h-4 text-slate-300 shrink-0"></i>
+
+      <!-- 2. Department Dropdown Hyperlink -->
+      <div class="relative inline-block" id="deptDropdownContainer">
+        <button 
+          type="button" 
+          id="deptDropdownBtn" 
+          class="inline-flex items-center gap-1.5 font-medium text-slate-700 hover:text-brand-700 hover:bg-slate-100 px-2.5 py-1 rounded-lg border border-slate-200/80 bg-white transition shadow-2xs"
+          title="Switch department"
+        >
+          <i data-lucide="folder-git-2" class="w-3.5 h-3.5 text-slate-400"></i>
+          <span id="breadcrumbDeptText">Security Engineering</span>
+          <i data-lucide="chevron-down" class="w-3.5 h-3.5 text-slate-400"></i>
+        </button>
+
+        <!-- Department Dropdown Menu -->
+        <div 
+          id="deptDropdownMenu" 
+          class="hidden absolute left-0 mt-1.5 w-72 rounded-xl bg-white border border-slate-200 shadow-xl py-2 z-50 fade-in"
+        >
+          <div class="px-3 py-1.5 border-b border-slate-100 flex items-center justify-between">
+            <span class="text-[11px] font-bold uppercase tracking-wider text-slate-400">Departments (4)</span>
+            <button type="button" id="deptDropdownViewAll" class="text-[11px] text-brand-600 hover:underline font-semibold">View all jobs</button>
+          </div>
+          <div id="deptDropdownList" class="py-1">
+            <!-- Dynamically populated via JS -->
+          </div>
+        </div>
+      </div>
+
+      <i data-lucide="chevron-right" class="w-4 h-4 text-slate-300 shrink-0"></i>
+
+      <!-- 3. Current Job Title Dropdown Hyperlink -->
+      <div class="relative inline-block" id="jobDropdownContainer">
+        <button 
+          type="button" 
+          id="jobDropdownBtn" 
+          class="inline-flex items-center gap-1.5 font-semibold text-slate-900 hover:text-brand-700 hover:bg-slate-100 px-2.5 py-1 rounded-lg border border-slate-200/80 bg-white transition shadow-2xs max-w-[200px] sm:max-w-md truncate"
+          title="Switch job in this department"
+        >
+          <span id="breadcrumbJobText" class="truncate">Systems &amp; Security Research Engineer</span>
+          <i data-lucide="chevron-down" class="w-3.5 h-3.5 text-slate-400 shrink-0"></i>
+        </button>
+
+        <!-- Jobs in Department Dropdown Menu -->
+        <div 
+          id="jobDropdownMenu" 
+          class="hidden absolute left-0 sm:left-auto sm:right-0 mt-1.5 w-80 rounded-xl bg-white border border-slate-200 shadow-xl py-2 z-50 fade-in"
+        >
+          <div class="px-3 py-1.5 border-b border-slate-100 flex items-center justify-between">
+            <span class="text-[11px] font-bold uppercase tracking-wider text-slate-400" id="jobDropdownHeaderTitle">Jobs in Department</span>
+            <span class="text-[11px] text-brand-600 font-semibold cursor-pointer hover:underline" id="jobDropdownAllDeptsBtn">Browse all</span>
+          </div>
+          <div id="jobDropdownList" class="py-1 max-h-64 overflow-y-auto divide-y divide-slate-50">
+            <!-- Dynamically populated via JS -->
+          </div>
+        </div>
+      </div>
+
     </nav>
 
     <!-- Job Header Card -->
@@ -106,20 +190,20 @@
       <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6 relative z-10">
         <div class="space-y-3 max-w-3xl">
           <div class="flex flex-wrap items-center gap-2">
-            <span class="px-2.5 py-1 rounded-md text-xs font-semibold bg-brand-50 text-brand-700 border border-brand-100">
+            <span id="jobTeamBadge" class="px-2.5 py-1 rounded-md text-xs font-semibold bg-brand-50 text-brand-700 border border-brand-100">
               R&amp;D Systems Lab
             </span>
-            <span class="px-2.5 py-1 rounded-md text-xs font-semibold bg-slate-100 text-slate-600">
+            <span id="jobReqId" class="px-2.5 py-1 rounded-md text-xs font-semibold bg-slate-100 text-slate-600">
               Req ID: SEC-2026-8841
             </span>
-            <span class="px-2.5 py-1 rounded-md text-xs font-semibold bg-amber-50 text-amber-700 border border-amber-200">
+            <span id="jobPriorityBadge" class="px-2.5 py-1 rounded-md text-xs font-semibold bg-amber-50 text-amber-700 border border-amber-200">
               High Priority
             </span>
           </div>
-          <h1 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-slate-900 tracking-tight">
+          <h1 id="jobTitleHeader" class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-slate-900 tracking-tight">
             Systems &amp; Security Research Engineer
           </h1>
-          <p class="text-slate-600 text-base leading-relaxed">
+          <p id="jobTaglineHeader" class="text-slate-600 text-base leading-relaxed">
             Lead deep-tech exploration into zero-trust kernel isolation, cryptographic boundary validation, and hardened cloud microarchitectures.
           </p>
         </div>
@@ -144,7 +228,7 @@
           </div>
           <div>
             <p class="text-xs text-slate-400 font-medium uppercase tracking-wider">Location</p>
-            <p class="font-semibold text-slate-800">San Francisco, CA (Hybrid)</p>
+            <p id="jobMetaLocation" class="font-semibold text-slate-800">San Francisco, CA (Hybrid)</p>
           </div>
         </div>
 
@@ -154,7 +238,7 @@
           </div>
           <div>
             <p class="text-xs text-slate-400 font-medium uppercase tracking-wider">Type</p>
-            <p class="font-semibold text-slate-800">Full-Time / Permanent</p>
+            <p id="jobMetaType" class="font-semibold text-slate-800">Full-Time / Permanent</p>
           </div>
         </div>
 
@@ -164,7 +248,7 @@
           </div>
           <div>
             <p class="text-xs text-slate-400 font-medium uppercase tracking-wider">Compensation</p>
-            <p class="font-semibold text-slate-800">$185k - $240k + Equity</p>
+            <p id="jobMetaSalary" class="font-semibold text-slate-800">$185k - $240k + Equity</p>
           </div>
         </div>
 
@@ -174,7 +258,7 @@
           </div>
           <div>
             <p class="text-xs text-slate-400 font-medium uppercase tracking-wider">Work Environment</p>
-            <p class="font-semibold text-slate-800">R&amp;D Systems Lab</p>
+            <p id="jobMetaEnv" class="font-semibold text-slate-800">R&amp;D Systems Lab</p>
           </div>
         </div>
       </div>
@@ -192,12 +276,14 @@
             <i data-lucide="book-open" class="w-5 h-5"></i>
             <h2 class="text-lg font-bold text-slate-900 tracking-tight">Job Overview</h2>
           </div>
-          <p class="text-slate-600 leading-relaxed mb-4">
-            At Nexus Systems, our Security Research Lab safeguards foundational infrastructure supporting millions of mission-critical transactions daily. As a <strong>Systems &amp; Security Research Engineer</strong>, you will operate at the intersection of low-level OS internals, microarchitectural resilience, and cutting-edge distributed systems defense.
-          </p>
-          <p class="text-slate-600 leading-relaxed">
-            You will collaborate with world-class cryptographers, compiler engineers, and security analysts to probe vulnerabilities, prototype defensive kernel runtime primitives, and publish research findings that establish industry standards.
-          </p>
+          <div id="jobOverviewContent" class="space-y-4 text-slate-600 leading-relaxed">
+            <p>
+              At Nexus Systems, our Security Research Lab safeguards foundational infrastructure supporting millions of mission-critical transactions daily. As a <strong>Systems &amp; Security Research Engineer</strong>, you will operate at the intersection of low-level OS internals, microarchitectural resilience, and cutting-edge distributed systems defense.
+            </p>
+            <p>
+              You will collaborate with world-class cryptographers, compiler engineers, and security analysts to probe vulnerabilities, prototype defensive kernel runtime primitives, and publish research findings that establish industry standards.
+            </p>
+          </div>
         </article>
 
         <!-- Responsibilities Section -->
@@ -206,7 +292,7 @@
             <i data-lucide="check-circle-2" class="w-5 h-5"></i>
             <h2 class="text-lg font-bold text-slate-900 tracking-tight">Key Responsibilities</h2>
           </div>
-          <ul class="space-y-3.5 text-slate-600">
+          <ul id="jobResponsibilitiesList" class="space-y-3.5 text-slate-600">
             <li class="flex items-start gap-3">
               <span class="p-1 rounded-full bg-brand-50 text-brand-600 mt-0.5 shrink-0">
                 <i data-lucide="check" class="w-3.5 h-3.5"></i>
@@ -242,7 +328,7 @@
           </div>
           
           <h3 class="text-sm font-semibold uppercase tracking-wider text-slate-500 mb-3">Minimum Qualifications</h3>
-          <ul class="space-y-3 text-slate-600 mb-6">
+          <ul id="jobMinQualsList" class="space-y-3 text-slate-600 mb-6">
             <li class="flex items-start gap-3">
               <span class="w-1.5 h-1.5 rounded-full bg-brand-600 mt-2 shrink-0"></span>
               <span>Bachelor’s, Master’s, or equivalent practical experience in Computer Science, Cybersecurity, or related STEM discipline.</span>
@@ -258,7 +344,7 @@
           </ul>
 
           <h3 class="text-sm font-semibold uppercase tracking-wider text-slate-500 mb-3">Preferred Qualifications</h3>
-          <ul class="space-y-3 text-slate-600">
+          <ul id="jobPrefQualsList" class="space-y-3 text-slate-600">
             <li class="flex items-start gap-3">
               <span class="w-1.5 h-1.5 rounded-full bg-indigo-400 mt-2 shrink-0"></span>
               <span>Experience with eBPF, secure enclave technology (Intel SGX, AWS Nitro Enclaves), or hypervisor virtualization primitives.</span>
@@ -304,7 +390,7 @@
           <div class="flex items-center justify-between border-b border-slate-100 pb-4 mb-5">
             <div>
               <h2 class="text-xl font-bold text-slate-900 tracking-tight">Candidate Application</h2>
-              <p class="text-xs text-slate-500 mt-0.5">Complete the form below to submit your profile.</p>
+              <p class="text-xs text-slate-500 mt-0.5">Applying for <span id="formJobTargetTitle" class="font-semibold text-brand-700">Systems &amp; Security Research Engineer</span></p>
             </div>
             <div class="p-2 bg-brand-50 text-brand-600 rounded-lg">
               <i data-lucide="file-text" class="w-5 h-5"></i>
@@ -593,6 +679,76 @@
     </div>
   </div>
 
+  <!-- Careers & Departments Directory Modal -->
+  <div id="careersDirectoryModal" class="fixed inset-0 z-50 hidden bg-slate-950/60 backdrop-blur-sm flex items-center justify-center p-3 sm:p-6">
+    <div class="bg-white border border-slate-200 rounded-2xl max-w-4xl w-full max-h-[90vh] flex flex-col shadow-2xl overflow-hidden fade-in">
+      
+      <!-- Modal Header -->
+      <div class="p-5 sm:p-6 border-b border-slate-200 flex items-start justify-between bg-slate-50/70">
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-brand-50 text-brand-700 border border-brand-200">
+              Nexus Systems Directory
+            </span>
+            <span class="text-xs text-slate-500 font-medium">8 Open Opportunities</span>
+          </div>
+          <h2 class="text-xl sm:text-2xl font-extrabold text-slate-900 tracking-tight mt-1">
+            Open Engineering &amp; Research Positions
+          </h2>
+          <p class="text-xs sm:text-sm text-slate-500 mt-0.5">
+            Click any position to view full qualifications and submit your application.
+          </p>
+        </div>
+        <button 
+          type="button" 
+          id="closeCareersModalBtn" 
+          class="p-2 rounded-xl text-slate-400 hover:text-slate-700 hover:bg-slate-200/60 transition shrink-0"
+          title="Close dialog"
+        >
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <!-- Search and Department Filter Controls -->
+      <div class="p-4 border-b border-slate-100 bg-white space-y-3">
+        <div class="relative">
+          <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+            <i data-lucide="search" class="w-4 h-4"></i>
+          </div>
+          <input 
+            type="text" 
+            id="modalJobSearchInput" 
+            placeholder="Filter roles by title, keyword, or technology (e.g. Kernel, Zero-Trust, Cryptography, Rust)..." 
+            class="w-full pl-10 pr-4 py-2 text-sm border border-slate-200 rounded-xl focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition bg-slate-50/50 focus:bg-white"
+          />
+        </div>
+
+        <!-- Department Filter Tabs -->
+        <div class="flex items-center gap-1.5 overflow-x-auto pb-1 text-xs" id="modalDeptTabs">
+          <!-- Dynamically populated via JS -->
+        </div>
+      </div>
+
+      <!-- Scrollable Jobs Grid List -->
+      <div id="modalJobsContainer" class="p-4 sm:p-6 overflow-y-auto space-y-3 flex-1 bg-slate-50/40">
+        <!-- Dynamically populated via JS -->
+      </div>
+
+      <!-- Modal Footer -->
+      <div class="p-4 border-t border-slate-200 bg-slate-50/80 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-slate-500">
+        <span>Equal Opportunity Employer • All positions open to hybrid &amp; remote applicants.</span>
+        <button 
+          type="button" 
+          id="modalCloseBottomBtn" 
+          class="px-4 py-2 rounded-lg bg-white border border-slate-200 text-slate-700 font-semibold hover:bg-slate-100 transition shadow-2xs"
+        >
+          Dismiss
+        </button>
+      </div>
+
+    </div>
+  </div>
+
   <!-- Footer -->
   <footer class="mt-16 border-t border-slate-200 bg-white py-8 text-center text-xs text-slate-500">
     <div class="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4">
@@ -638,6 +794,326 @@
 
     const confirmationModal = document.getElementById('confirmationModal');
     const closeModalBtn = document.getElementById('closeModalBtn');
+
+    // Breadcrumb & Navigation Elements
+    const breadcrumbCareersBtn = document.getElementById('breadcrumbCareersBtn');
+    const deptDropdownContainer = document.getElementById('deptDropdownContainer');
+    const deptDropdownBtn = document.getElementById('deptDropdownBtn');
+    const deptDropdownMenu = document.getElementById('deptDropdownMenu');
+    const deptDropdownList = document.getElementById('deptDropdownList');
+    const breadcrumbDeptText = document.getElementById('breadcrumbDeptText');
+    const deptDropdownViewAll = document.getElementById('deptDropdownViewAll');
+
+    const jobDropdownContainer = document.getElementById('jobDropdownContainer');
+    const jobDropdownBtn = document.getElementById('jobDropdownBtn');
+    const jobDropdownMenu = document.getElementById('jobDropdownMenu');
+    const jobDropdownList = document.getElementById('jobDropdownList');
+    const breadcrumbJobText = document.getElementById('breadcrumbJobText');
+    const jobDropdownHeaderTitle = document.getElementById('jobDropdownHeaderTitle');
+    const jobDropdownAllDeptsBtn = document.getElementById('jobDropdownAllDeptsBtn');
+
+    const navAllJobsBtn = document.getElementById('navAllJobsBtn');
+    const mobileAllJobsBtn = document.getElementById('mobileAllJobsBtn');
+
+    // Job Page Elements
+    const jobTeamBadge = document.getElementById('jobTeamBadge');
+    const jobReqId = document.getElementById('jobReqId');
+    const jobPriorityBadge = document.getElementById('jobPriorityBadge');
+    const jobTitleHeader = document.getElementById('jobTitleHeader');
+    const jobTaglineHeader = document.getElementById('jobTaglineHeader');
+    const jobMetaLocation = document.getElementById('jobMetaLocation');
+    const jobMetaType = document.getElementById('jobMetaType');
+    const jobMetaSalary = document.getElementById('jobMetaSalary');
+    const jobMetaEnv = document.getElementById('jobMetaEnv');
+    const jobOverviewContent = document.getElementById('jobOverviewContent');
+    const jobResponsibilitiesList = document.getElementById('jobResponsibilitiesList');
+    const jobMinQualsList = document.getElementById('jobMinQualsList');
+    const jobPrefQualsList = document.getElementById('jobPrefQualsList');
+    const formJobTargetTitle = document.getElementById('formJobTargetTitle');
+
+    // Careers Directory Modal Elements
+    const careersDirectoryModal = document.getElementById('careersDirectoryModal');
+    const closeCareersModalBtn = document.getElementById('closeCareersModalBtn');
+    const modalCloseBottomBtn = document.getElementById('modalCloseBottomBtn');
+    const modalJobSearchInput = document.getElementById('modalJobSearchInput');
+    const modalDeptTabs = document.getElementById('modalDeptTabs');
+    const modalJobsContainer = document.getElementById('modalJobsContainer');
+
+    // Comprehensive Departments and Jobs Dataset
+    const DEPARTMENTS = [
+      { id: 'security', name: 'Security Engineering', icon: 'shield-check', count: 3 },
+      { id: 'infra', name: 'Infrastructure & Cloud', icon: 'server', count: 2 },
+      { id: 'ai', name: 'AI & Systems Research', icon: 'cpu', count: 2 },
+      { id: 'product', name: 'Product & Operations', icon: 'layers', count: 1 }
+    ];
+
+    const JOBS_DATA = [
+      {
+        id: 'SEC-2026-8841',
+        deptId: 'security',
+        department: 'Security Engineering',
+        team: 'R&D Systems Lab',
+        title: 'Systems & Security Research Engineer',
+        priority: 'High Priority',
+        location: 'San Francisco, CA (Hybrid)',
+        type: 'Full-Time / Permanent',
+        salary: '$185k - $240k + Equity',
+        env: 'R&D Systems Lab',
+        tagline: 'Lead deep-tech exploration into zero-trust kernel isolation, cryptographic boundary validation, and hardened cloud microarchitectures.',
+        overview: [
+          'At Nexus Systems, our Security Research Lab safeguards foundational infrastructure supporting millions of mission-critical transactions daily. As a Systems & Security Research Engineer, you will operate at the intersection of low-level OS internals, microarchitectural resilience, and cutting-edge distributed systems defense.',
+          'You will collaborate with world-class cryptographers, compiler engineers, and security analysts to probe vulnerabilities, prototype defensive kernel runtime primitives, and publish research findings that establish industry standards.'
+        ],
+        responsibilities: [
+          'Conduct in-depth vulnerability analysis, fuzzing, and penetration testing on operating system kernels, hypervisors, and hardware isolation layers.',
+          'Architect automated threat detection instrumentation and secure sandboxing mechanisms for high-throughput cloud environments.',
+          'Develop proof-of-concept exploits and defensive mitigations to protect next-generation containerized microservices and Kubernetes clusters.',
+          'Author high-fidelity research documentation, RFCs, and academic publications, representing Nexus Systems at premier conferences.'
+        ],
+        minQuals: [
+          'Bachelor’s, Master’s, or equivalent practical experience in Computer Science, Cybersecurity, or related STEM discipline.',
+          'Demonstrated proficiency in low-level systems programming languages (C/C++, Rust) and scripting/automation with Python.',
+          'Solid understanding of Linux kernel internals, virtual memory management, system calls, and network protocol stacks (TCP/IP, TLS).'
+        ],
+        prefQuals: [
+          'Experience with eBPF, secure enclave technology (Intel SGX, AWS Nitro Enclaves), or hypervisor virtualization primitives.',
+          'Prior contributions to open-source security tools or recognized vulnerability disclosures (CVEs).'
+        ],
+        skills: ['C/C++', 'Rust', 'Linux Kernel', 'Zero Trust', 'Python', 'eBPF']
+      },
+      {
+        id: 'SEC-2026-8842',
+        deptId: 'security',
+        department: 'Security Engineering',
+        team: 'Applied Cryptography Group',
+        title: 'Zero-Trust Cryptographic Architect',
+        priority: 'High Priority',
+        location: 'Remote (US / Canada)',
+        type: 'Full-Time / Permanent',
+        salary: '$195k - $260k + Equity',
+        env: 'Cryptographic Core Lab',
+        tagline: 'Design and deploy post-quantum cryptographic protocols, mutual-TLS mesh architectures, and automated hardware key management systems.',
+        overview: [
+          'The Applied Cryptography team at Nexus Systems designs the cryptographic foundations protecting identity, secrets, and end-to-end communication channels across planetary infrastructure. In this role, you will be the architectural authority guiding our transition to post-quantum standards and zero-knowledge verification frameworks.',
+          'You will work directly with distributed systems teams to integrate state-of-the-art crypto primitives without compromising microsecond latency budgets.'
+        ],
+        responsibilities: [
+          'Architect zero-trust cryptographic boundaries and post-quantum key-exchange protocols for internal service fabrics.',
+          'Design high-assurance KMS/HSM integrations and automated cryptographic secret rotation pipelines.',
+          'Conduct cryptographic audits and formal verification on cryptographic libraries, protocols, and microcode implementations.',
+          'Collaborate with industry consortia and standards bodies (NIST, IETF) to benchmark next-gen crypto implementations.'
+        ],
+        minQuals: [
+          'Master’s or PhD in Cryptography, Mathematics, Computer Science, or equivalent practical research background.',
+          '5+ years implementing cryptographic primitives in memory-safe languages like Rust or Go.',
+          'Deep mastery of public key infrastructure (PKI), TLS 1.3, mTLS, zero-knowledge proofs, and post-quantum algorithms.'
+        ],
+        prefQuals: [
+          'Experience deploying cryptographic protocols at multi-region cloud scale with strict latency SLAs.',
+          'Authored peer-reviewed papers or contributed to widely adopted cryptographic open-source libraries (e.g., ring, OpenSSL, libsodium).'
+        ],
+        skills: ['Cryptography', 'Rust', 'Go', 'Zero Trust', 'PKI', 'Post-Quantum']
+      },
+      {
+        id: 'SEC-2026-8845',
+        deptId: 'security',
+        department: 'Security Engineering',
+        team: 'Offensive Systems Lab',
+        title: 'Vulnerability & Kernel Researcher',
+        priority: 'Urgent Need',
+        location: 'San Francisco, CA (Hybrid)',
+        type: 'Full-Time / Permanent',
+        salary: '$175k - $230k + Equity',
+        env: 'Offensive Security Lab',
+        tagline: 'Deconstruct complex OS kernels, hypervisors, and silicon microarchitectures to uncover zero-day vulnerabilities before adversaries do.',
+        overview: [
+          'Nexus Systems Offensive Security Lab operates as an elite red-cell research group. You will reverse engineer proprietary hypervisors, analyze microcode errata, and perform advanced grey-box fuzzing to uncover complex vulnerabilities across modern computing stacks.',
+          'Your research directly drives the defensive perimeter protections implemented across all Nexus enterprise systems.'
+        ],
+        responsibilities: [
+          'Perform advanced reverse engineering, differential fuzzing, and variant analysis against kernels and firmware.',
+          'Develop weaponized proof-of-concept exploits to validate boundary breaches across CPU and virtualization domains.',
+          'Partner with defensive engineering units to architect proactive runtime mitigations and compiler-level sanitizers.',
+          'Present discoveries at Black Hat, DEF CON, or USENIX Security.'
+        ],
+        minQuals: [
+          'Extensive background in binary exploitation, reverse engineering (IDA Pro, Ghidra), and kernel-mode debugging (WinDbg, GDB).',
+          'Strong proficiency in assembly (x86_64, ARM64), C, and Python for exploit development and fuzzing harness automation.',
+          'Thorough understanding of modern exploit mitigations (ASLR, DEP, CFI, PAC, SMEP/SMAP).'
+        ],
+        prefQuals: [
+          'Track record of credited CVEs in operating system kernels, hypervisors, or hardware platforms.',
+          'Experience building custom coverage-guided fuzzing engines (AFL++, syzkaller, Honggfuzz).'
+        ],
+        skills: ['Reverse Engineering', 'C', 'Assembly', 'Kernel', 'Ghidra', 'Fuzzing']
+      },
+      {
+        id: 'INF-2026-4102',
+        deptId: 'infra',
+        department: 'Infrastructure & Cloud',
+        team: 'Distributed Systems Core',
+        title: 'Staff Distributed Systems Engineer',
+        priority: 'Active Search',
+        location: 'New York, NY / Remote',
+        type: 'Full-Time / Permanent',
+        salary: '$190k - $250k + Equity',
+        env: 'Planetary Mesh Lab',
+        tagline: 'Scale our multi-region consensus engines, Raft-based state machines, and high-throughput low-latency telemetry pipelines.',
+        overview: [
+          'Nexus Systems processes petabytes of telemetry and security event streams per hour. As Staff Distributed Systems Engineer, you will design the next generation of our global state synchronization engines, ensuring fault-tolerance and linearizable consistency under chaotic network partitioning.',
+          'You will set the technical direction for distributed storage and stream processing infrastructure.'
+        ],
+        responsibilities: [
+          'Lead design and implementation of geo-distributed consensus and storage engines handling 5M+ QPS.',
+          'Debug intricate race conditions, partial partition phenomena, and tail-latency anomalies across cloud tiers.',
+          'Define reliable disaster-recovery protocols and automated cross-region failover automation.',
+          'Mentor senior engineers and champion architectural rigor and operational excellence.'
+        ],
+        minQuals: [
+          '8+ years of engineering experience with high-scale distributed systems in Go, Rust, or C++.',
+          'Proven expertise with consensus protocols (Paxos, Raft), distributed storage, and lock-free concurrency.',
+          'Deep experience running high-availability distributed services across multi-region AWS or GCP environments.'
+        ],
+        prefQuals: [
+          'Experience with Jepsen testing and formal distributed specification modeling (TLA+).',
+          'Contributions to open-source systems such as etcd, TiKV, Kafka, or CockroachDB.'
+        ],
+        skills: ['Go', 'Rust', 'Distributed Systems', 'Raft', 'Kubernetes', 'AWS']
+      },
+      {
+        id: 'INF-2026-4108',
+        deptId: 'infra',
+        department: 'Infrastructure & Cloud',
+        team: 'Platform Cloud Foundation',
+        title: 'Site Reliability & Hardened Cloud Architect',
+        priority: 'High Priority',
+        location: 'Remote (US)',
+        type: 'Full-Time / Permanent',
+        salary: '$170k - $225k + Equity',
+        env: 'Cloud Operations Center',
+        tagline: 'Engineer immutable, self-healing Kubernetes platforms and zero-downtime infrastructure-as-code automation.',
+        overview: [
+          'Our Platform Cloud Foundation team ensures that the infrastructure under Nexus Systems never sleeps. We build hardened Kubernetes clusters, automated GitOps deployment pipelines, and proactive chaos-engineering systems that survive catastrophic outages.',
+          'In this role, you will bridge the gap between development speed and ultra-reliable enterprise security.'
+        ],
+        responsibilities: [
+          'Architect hardened, zero-privilege multi-tenant Kubernetes clusters with Cilium eBPF networking.',
+          'Implement declarative GitOps workflows, automated canary analysis, and self-healing infrastructure controllers.',
+          'Conduct chaos engineering experiments and game days to surface hidden failure domains before they impact production.',
+          'Establish SLOs, SLIs, and real-time observability dashboards using Prometheus, OpenTelemetry, and Grafana.'
+        ],
+        minQuals: [
+          '5+ years in SRE or cloud infrastructure roles supporting mission-critical 99.99%+ SLA production systems.',
+          'Advanced hands-on experience with Kubernetes, Terraform, Linux systems administration, and Docker.',
+          'Strong scripting and automation abilities in Python, Go, or Bash.'
+        ],
+        prefQuals: [
+          'Certified Kubernetes Administrator (CKA) or Cloud Security Specialty certification.',
+          'Experience managing large-scale service meshes (Istio, Linkerd) and eBPF network security observability.'
+        ],
+        skills: ['Kubernetes', 'Terraform', 'CI/CD', 'Linux', 'Go', 'Prometheus']
+      },
+      {
+        id: 'RES-2026-9014',
+        deptId: 'ai',
+        department: 'AI & Systems Research',
+        team: 'Adversarial Machine Learning Lab',
+        title: 'AI Safety & Adversarial Robustness Scientist',
+        priority: 'High Priority',
+        location: 'San Francisco, CA (Hybrid)',
+        type: 'Full-Time / Permanent',
+        salary: '$200k - $275k + Equity',
+        env: 'AI Frontier Lab',
+        tagline: 'Pioneer defenses against prompt injection, jailbreaking, model poisoning, and data exfiltration across enterprise LLM pipelines.',
+        overview: [
+          'As artificial intelligence integrates deeply into enterprise systems, protecting foundation models from adversarial exploits is critical. In the Adversarial ML Lab, you will discover emerging exploit vectors against multimodal models and invent novel mathematical boundaries to prevent hallucination exploits and prompt injection attacks.',
+          'You will collaborate closely with AI alignment teams and system security engineers.'
+        ],
+        responsibilities: [
+          'Research and benchmark adversarial evasion attacks, red-teaming harnesses, and representation-level poisoning.',
+          'Build real-time defense layers and guardrail filters that evaluate model inputs/outputs at microsecond scale.',
+          'Publish novel findings in leading venues (NeurIPS, ICML, ICLR, IEEE S&P) and open-source robust benchmark datasets.',
+          'Guide enterprise product teams on secure fine-tuning, RAG data provenance, and watermarking techniques.'
+        ],
+        minQuals: [
+          'PhD or equivalent research publication track record in Machine Learning, Computer Science, or Applied Mathematics.',
+          'Expert proficiency in PyTorch, JAX, Python, and GPU-accelerated computing (CUDA).',
+          'Strong research background in adversarial ML, model verification, or robust optimization.'
+        ],
+        prefQuals: [
+          'Demonstrated experience evaluating and defending large language model (LLM) agent architectures.',
+          'Prior contributions to major ML security frameworks (ART, TextAttack, Cleanba).'
+        ],
+        skills: ['PyTorch', 'Python', 'Machine Learning', 'CUDA', 'Adversarial ML', 'LLMs']
+      },
+      {
+        id: 'RES-2026-9020',
+        deptId: 'ai',
+        department: 'AI & Systems Research',
+        team: 'Accelerated Compute Engineering',
+        title: 'High-Performance Compute (HPC) Systems Engineer',
+        priority: 'Active Search',
+        location: 'Austin, TX / Hybrid',
+        type: 'Full-Time / Permanent',
+        salary: '$180k - $240k + Equity',
+        env: 'Silicon & Compute Lab',
+        tagline: 'Optimize distributed GPU training clusters, RDMA networks, and kernel-level memory management for massive scale workloads.',
+        overview: [
+          'Nexus Systems Accelerated Compute team designs and operates thousands of high-performance GPUs and custom accelerators powering our real-time security models. You will profile distributed memory bandwidth, customize RoCE/InfiniBand communication topologies, and optimize GPU kernel performance down to the bare silicon.'
+        ],
+        responsibilities: [
+          'Scale distributed training and inference clusters utilizing InfiniBand/RoCEv2 and high-speed NVLink interconnects.',
+          'Write optimized Triton and CUDA kernels to eliminate memory bottlenecks in custom transformer architectures.',
+          'Monitor and tune GPU scheduling, NCCL communication rings, and PCIe saturation across heterogeneous clusters.',
+          'Diagnose hardware degradation, silent data corruption, and thermal throttling at scale.'
+        ],
+        minQuals: [
+          'Bachelor’s or Master’s in Computer Engineering, Electrical Engineering, or Computer Science.',
+          '3+ years profiling and optimizing GPU compute workflows (CUDA, Triton, C++, Python).',
+          'Deep understanding of computer architecture, memory hierarchies (HBM, PCIe Gen5), and RDMA networking.'
+        ],
+        prefQuals: [
+          'Experience with Slurm, Kubernetes device plugins, and large cluster telemetry collection.',
+          'Track record optimizing kernel execution with NVIDIA Nsight Systems and Compute.'
+        ],
+        skills: ['CUDA', 'C++', 'Python', 'Triton', 'HPC', 'Linux Kernel']
+      },
+      {
+        id: 'OPS-2026-3110',
+        deptId: 'product',
+        department: 'Product & Operations',
+        team: 'Enterprise Trust & Compliance',
+        title: 'Technical Security Compliance Lead',
+        priority: 'Active Search',
+        location: 'Remote (US)',
+        type: 'Full-Time / Permanent',
+        salary: '$150k - $200k + Equity',
+        env: 'Governance & Trust Lab',
+        tagline: 'Translate engineering excellence into bulletproof security compliance across SOC2 Type II, FedRAMP, and ISO 27001.',
+        overview: [
+          'Our Enterprise Trust team bridges deep technical architecture and global compliance frameworks. As Technical Security Compliance Lead, you will work alongside research engineers and infrastructure architects to automate continuous compliance monitoring, audit evidence gathering, and zero-trust policy verification.'
+        ],
+        responsibilities: [
+          'Lead technical audit readiness and continuous evidence collection for FedRAMP High, SOC2 Type II, and ISO 27001.',
+          'Build automated compliance-as-code policies integrated directly into CI/CD deployment pipelines.',
+          'Interface directly with Fortune 500 enterprise customers and security audit assessors.',
+          'Collaborate with engineering teams to ensure cryptographic key management and data residency standards are met.'
+        ],
+        minQuals: [
+          '5+ years in technical security compliance, security engineering, or technical auditing.',
+          'In-depth knowledge of SOC 2, FedRAMP, HIPAA, ISO 27001, and NIST 800-53 security frameworks.',
+          'Ability to read infrastructure code (Terraform, AWS IAM policies) and review architecture diagrams.'
+        ],
+        prefQuals: [
+          'Certifications such as CISSP, CISA, or CCSP.',
+          'Experience with automated compliance platforms (Vanta, Drata) and custom API integrations.'
+        ],
+        skills: ['Security Compliance', 'SOC2', 'FedRAMP', 'AWS', 'Audit', 'Terraform']
+      }
+    ];
+
+    let currentJobId = 'SEC-2026-8841';
+    let currentModalDeptFilter = 'all';
 
     // Configure PDF.js worker
     if (window.pdfjsLib) {
@@ -1110,6 +1586,332 @@
     confirmationModal.addEventListener('click', (e) => {
       if (e.target === confirmationModal) {
         confirmationModal.classList.add('hidden');
+      }
+    });
+
+    // ==========================================
+    // Job Loading & Page Dynamic Population
+    // ==========================================
+    function loadJob(jobId, shouldScroll = true) {
+      const job = JOBS_DATA.find(j => j.id === jobId) || JOBS_DATA[0];
+      currentJobId = job.id;
+
+      // 1. Update Breadcrumbs
+      if (breadcrumbDeptText) breadcrumbDeptText.textContent = job.department;
+      if (breadcrumbJobText) breadcrumbJobText.textContent = job.title;
+      if (jobDropdownHeaderTitle) jobDropdownHeaderTitle.textContent = `Jobs in ${job.department}`;
+
+      // 2. Update Job Header Card
+      if (jobTeamBadge) jobTeamBadge.textContent = job.team;
+      if (jobReqId) jobReqId.textContent = `Req ID: ${job.id}`;
+      if (jobPriorityBadge) jobPriorityBadge.textContent = job.priority;
+      if (jobTitleHeader) jobTitleHeader.textContent = job.title;
+      if (jobTaglineHeader) jobTaglineHeader.textContent = job.tagline;
+      if (jobMetaLocation) jobMetaLocation.textContent = job.location;
+      if (jobMetaType) jobMetaType.textContent = job.type;
+      if (jobMetaSalary) jobMetaSalary.textContent = job.salary;
+      if (jobMetaEnv) jobMetaEnv.textContent = job.env;
+
+      // 3. Update Overview
+      if (jobOverviewContent) {
+        jobOverviewContent.innerHTML = job.overview.map(paragraph => `<p>${paragraph}</p>`).join('');
+      }
+
+      // 4. Update Responsibilities
+      if (jobResponsibilitiesList) {
+        jobResponsibilitiesList.innerHTML = job.responsibilities.map(resp => `
+          <li class="flex items-start gap-3">
+            <span class="p-1 rounded-full bg-brand-50 text-brand-600 mt-0.5 shrink-0">
+              <i data-lucide="check" class="w-3.5 h-3.5"></i>
+            </span>
+            <span>${resp}</span>
+          </li>
+        `).join('');
+      }
+
+      // 5. Update Qualifications
+      if (jobMinQualsList) {
+        jobMinQualsList.innerHTML = job.minQuals.map(q => `
+          <li class="flex items-start gap-3">
+            <span class="w-1.5 h-1.5 rounded-full bg-brand-600 mt-2 shrink-0"></span>
+            <span>${q}</span>
+          </li>
+        `).join('');
+      }
+      if (jobPrefQualsList) {
+        jobPrefQualsList.innerHTML = job.prefQuals.map(q => `
+          <li class="flex items-start gap-3">
+            <span class="w-1.5 h-1.5 rounded-full bg-indigo-400 mt-2 shrink-0"></span>
+            <span>${q}</span>
+          </li>
+        `).join('');
+      }
+
+      // 6. Update Form Target
+      if (formJobTargetTitle) {
+        formJobTargetTitle.textContent = job.title;
+      }
+
+      // 7. Update Document Title and URL hash
+      document.title = `${job.title} | Nexus Systems Careers`;
+      if (history.replaceState) {
+        history.replaceState(null, '', `#job=${job.id}`);
+      } else {
+        window.location.hash = `job=${job.id}`;
+      }
+
+      // 8. Re-render dropdown items to update active states
+      renderDeptDropdown();
+      renderJobDropdown();
+      closeAllDropdowns();
+      closeCareersModal();
+
+      lucide.createIcons();
+
+      if (shouldScroll) {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    }
+
+    // ==========================================
+    // Dropdowns (Department & Jobs in Dept)
+    // ==========================================
+    function renderDeptDropdown() {
+      const activeJob = JOBS_DATA.find(j => j.id === currentJobId) || JOBS_DATA[0];
+      deptDropdownList.innerHTML = DEPARTMENTS.map(dept => {
+        const isCurrent = dept.name === activeJob.department;
+        return `
+          <button 
+            type="button" 
+            onclick="selectDepartment('${dept.id}')"
+            class="w-full text-left px-3 py-2 text-xs hover:bg-slate-50 flex items-center justify-between rounded-lg transition ${isCurrent ? 'bg-brand-50/70 text-brand-700 font-semibold' : 'text-slate-700 font-medium'}"
+          >
+            <div class="flex items-center gap-2">
+              <i data-lucide="${dept.icon}" class="w-4 h-4 ${isCurrent ? 'text-brand-600' : 'text-slate-400'}"></i>
+              <span>${dept.name}</span>
+            </div>
+            <span class="px-1.5 py-0.5 rounded-full text-[10px] ${isCurrent ? 'bg-brand-200 text-brand-900 font-bold' : 'bg-slate-100 text-slate-500'}">${dept.count}</span>
+          </button>
+        `;
+      }).join('');
+      lucide.createIcons();
+    }
+
+    function renderJobDropdown() {
+      const activeJob = JOBS_DATA.find(j => j.id === currentJobId) || JOBS_DATA[0];
+      const deptJobs = JOBS_DATA.filter(j => j.department === activeJob.department);
+
+      jobDropdownList.innerHTML = deptJobs.map(job => {
+        const isCurrent = job.id === activeJob.id;
+        return `
+          <button 
+            type="button" 
+            onclick="loadJob('${job.id}')"
+            class="w-full text-left p-2.5 text-xs hover:bg-slate-50 transition rounded-lg ${isCurrent ? 'bg-brand-50/80' : ''}"
+          >
+            <div class="flex items-center justify-between gap-1 mb-0.5">
+              <span class="font-bold truncate ${isCurrent ? 'text-brand-700' : 'text-slate-800'}">${job.title}</span>
+              ${isCurrent ? '<span class="text-[9px] bg-brand-600 text-white font-bold px-1.5 py-0.5 rounded shrink-0">Current</span>' : ''}
+            </div>
+            <div class="flex items-center gap-2 text-[10px] text-slate-400">
+              <span>${job.id}</span>
+              <span>•</span>
+              <span class="truncate">${job.location}</span>
+            </div>
+          </button>
+        `;
+      }).join('');
+      lucide.createIcons();
+    }
+
+    function selectDepartment(deptId) {
+      const jobInDept = JOBS_DATA.find(j => j.deptId === deptId);
+      if (jobInDept) {
+        loadJob(jobInDept.id);
+      }
+      closeAllDropdowns();
+    }
+
+    function closeAllDropdowns() {
+      deptDropdownMenu.classList.add('hidden');
+      jobDropdownMenu.classList.add('hidden');
+    }
+
+    // Toggle Dropdown Buttons
+    deptDropdownBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const isClosed = deptDropdownMenu.classList.contains('hidden');
+      closeAllDropdowns();
+      if (isClosed) {
+        renderDeptDropdown();
+        deptDropdownMenu.classList.remove('hidden');
+      }
+    });
+
+    jobDropdownBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const isClosed = jobDropdownMenu.classList.contains('hidden');
+      closeAllDropdowns();
+      if (isClosed) {
+        renderJobDropdown();
+        jobDropdownMenu.classList.remove('hidden');
+      }
+    });
+
+    // Close on outside click
+    document.addEventListener('click', (e) => {
+      if (!deptDropdownContainer.contains(e.target) && !jobDropdownContainer.contains(e.target)) {
+        closeAllDropdowns();
+      }
+    });
+
+    // ==========================================
+    // Careers Directory Modal Controller
+    // ==========================================
+    function openCareersModal(preselectedDept = 'all') {
+      closeAllDropdowns();
+      currentModalDeptFilter = preselectedDept;
+      renderModalDeptTabs();
+      renderModalJobsList();
+      careersDirectoryModal.classList.remove('hidden');
+      lucide.createIcons();
+      setTimeout(() => modalJobSearchInput.focus(), 50);
+    }
+
+    function closeCareersModal() {
+      careersDirectoryModal.classList.add('hidden');
+      modalJobSearchInput.value = '';
+    }
+
+    function renderModalDeptTabs() {
+      const allCount = JOBS_DATA.length;
+      const tabs = [
+        { id: 'all', name: 'All Departments', count: allCount },
+        ...DEPARTMENTS
+      ];
+
+      modalDeptTabs.innerHTML = tabs.map(tab => {
+        const isActive = currentModalDeptFilter === tab.id;
+        return `
+          <button 
+            type="button" 
+            onclick="filterModalByDept('${tab.id}')"
+            class="px-3 py-1.5 rounded-lg font-medium whitespace-nowrap transition flex items-center gap-1.5 ${isActive ? 'bg-brand-600 text-white shadow-sm' : 'bg-slate-100 hover:bg-slate-200 text-slate-700'}"
+          >
+            <span>${tab.name}</span>
+            <span class="text-[10px] px-1.5 py-0.2 rounded-full ${isActive ? 'bg-white/25 text-white' : 'bg-slate-200 text-slate-600'}">${tab.count}</span>
+          </button>
+        `;
+      }).join('');
+    }
+
+    function filterModalByDept(deptId) {
+      currentModalDeptFilter = deptId;
+      renderModalDeptTabs();
+      renderModalJobsList();
+    }
+
+    function renderModalJobsList() {
+      const query = (modalJobSearchInput.value || '').toLowerCase().trim();
+
+      const filtered = JOBS_DATA.filter(job => {
+        const matchesDept = (currentModalDeptFilter === 'all') || (job.deptId === currentModalDeptFilter);
+        if (!matchesDept) return false;
+
+        if (!query) return true;
+        const searchable = `${job.title} ${job.department} ${job.team} ${job.location} ${job.tagline} ${job.skills.join(' ')} ${job.id}`.toLowerCase();
+        return searchable.includes(query);
+      });
+
+      if (filtered.length === 0) {
+        modalJobsContainer.innerHTML = `
+          <div class="text-center py-12 bg-white rounded-xl border border-slate-200 p-6">
+            <i data-lucide="search-x" class="w-10 h-10 text-slate-300 mx-auto mb-2"></i>
+            <h4 class="text-sm font-bold text-slate-800">No positions matched your search</h4>
+            <p class="text-xs text-slate-500 mt-1">Try searching for keywords like "Rust", "Kernel", "Security", or clear your filter.</p>
+            <button type="button" onclick="modalJobSearchInput.value = ''; filterModalByDept('all');" class="mt-3 text-xs font-semibold text-brand-600 hover:underline">Reset Filters</button>
+          </div>
+        `;
+        lucide.createIcons();
+        return;
+      }
+
+      modalJobsContainer.innerHTML = filtered.map(job => {
+        const isCurrent = job.id === currentJobId;
+        return `
+          <div class="bg-white border ${isCurrent ? 'border-brand-500 ring-2 ring-brand-500/10' : 'border-slate-200 hover:border-slate-300'} rounded-xl p-4 sm:p-5 transition shadow-2xs hover:shadow-sm flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+            <div class="space-y-1.5 flex-1 min-w-0">
+              <div class="flex flex-wrap items-center gap-2">
+                <span class="px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider bg-brand-50 text-brand-700 border border-brand-200/80">
+                  ${job.department}
+                </span>
+                <span class="text-[11px] font-semibold text-slate-400">
+                  ${job.id}
+                </span>
+                <span class="px-2 py-0.5 rounded text-[10px] font-semibold bg-amber-50 text-amber-700 border border-amber-200">
+                  ${job.priority}
+                </span>
+                ${isCurrent ? '<span class="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-100 text-emerald-800">Active Viewing</span>' : ''}
+              </div>
+
+              <h3 class="text-base font-extrabold text-slate-900 tracking-tight">${job.title}</h3>
+              <p class="text-xs text-slate-500 line-clamp-2 leading-relaxed">${job.tagline}</p>
+
+              <div class="flex flex-wrap items-center gap-3 pt-1 text-xs text-slate-600">
+                <span class="flex items-center gap-1"><i data-lucide="map-pin" class="w-3.5 h-3.5 text-slate-400"></i> ${job.location}</span>
+                <span>•</span>
+                <span class="flex items-center gap-1"><i data-lucide="dollar-sign" class="w-3.5 h-3.5 text-slate-400"></i> ${job.salary}</span>
+                <span>•</span>
+                <span class="flex items-center gap-1"><i data-lucide="briefcase" class="w-3.5 h-3.5 text-slate-400"></i> ${job.type}</span>
+              </div>
+
+              <div class="flex flex-wrap gap-1.5 pt-2">
+                ${job.skills.map(s => `<span class="px-2 py-0.5 rounded text-[10px] font-medium bg-slate-100 text-slate-600">${s}</span>`).join('')}
+              </div>
+            </div>
+
+            <div class="sm:shrink-0 flex items-center sm:flex-col justify-end gap-2">
+              <button 
+                type="button" 
+                onclick="loadJob('${job.id}')"
+                class="w-full sm:w-auto px-4 py-2.5 rounded-xl font-semibold text-xs shadow-sm transition flex items-center justify-center gap-1.5 ${isCurrent ? 'bg-slate-100 text-slate-700 hover:bg-slate-200' : 'bg-brand-600 hover:bg-brand-700 text-white shadow-brand-600/20'}"
+              >
+                <span>${isCurrent ? 'Currently Viewing' : 'View Position'}</span>
+                <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+              </button>
+            </div>
+          </div>
+        `;
+      }).join('');
+      lucide.createIcons();
+    }
+
+    // Modal Trigger Event Listeners
+    if (breadcrumbCareersBtn) breadcrumbCareersBtn.addEventListener('click', () => openCareersModal('all'));
+    if (navAllJobsBtn) navAllJobsBtn.addEventListener('click', () => openCareersModal('all'));
+    if (mobileAllJobsBtn) mobileAllJobsBtn.addEventListener('click', () => openCareersModal('all'));
+    if (deptDropdownViewAll) deptDropdownViewAll.addEventListener('click', () => openCareersModal('all'));
+    if (jobDropdownAllDeptsBtn) jobDropdownAllDeptsBtn.addEventListener('click', () => openCareersModal('all'));
+
+    if (closeCareersModalBtn) closeCareersModalBtn.addEventListener('click', closeCareersModal);
+    if (modalCloseBottomBtn) modalCloseBottomBtn.addEventListener('click', closeCareersModal);
+
+    careersDirectoryModal.addEventListener('click', (e) => {
+      if (e.target === careersDirectoryModal) closeCareersModal();
+    });
+
+    modalJobSearchInput.addEventListener('input', renderModalJobsList);
+
+    // Initial check for #job= in URL hash
+    window.addEventListener('DOMContentLoaded', () => {
+      if (window.location.hash.startsWith('#job=')) {
+        const targetId = window.location.hash.replace('#job=', '').trim();
+        if (targetId) {
+          loadJob(targetId, false);
+        }
+      } else {
+        renderDeptDropdown();
+        renderJobDropdown();
       }
     });
   </script>
