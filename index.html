@@ -1,0 +1,840 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full bg-slate-50 text-slate-900 antialiased">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Systems &amp; Security Research Engineer | Nexus Systems Careers</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              50: '#eef2ff',
+              100: '#e0e7ff',
+              200: '#c7d2fe',
+              500: '#6366f1',
+              600: '#4f46e5',
+              700: '#4338ca',
+              800: '#3730a3',
+              900: '#312e81',
+            }
+          }
+        }
+      }
+    };
+  </script>
+  <style>
+    .fade-in {
+      animation: fadeIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body class="min-h-full flex flex-col bg-slate-50 text-slate-800">
+
+  <!-- Top Navigation Bar -->
+  <header class="sticky top-0 z-40 bg-white/90 backdrop-blur-md border-b border-slate-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16">
+        <!-- Brand Logo Placeholder -->
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-600 to-indigo-500 flex items-center justify-center text-white shadow-md shadow-brand-500/20">
+            <i data-lucide="shield-check" class="w-6 h-6"></i>
+          </div>
+          <div>
+            <div class="flex items-center gap-2">
+              <span class="font-bold text-lg tracking-tight text-slate-900">NEXUS</span>
+              <span class="text-xs font-semibold uppercase tracking-wider px-2 py-0.5 rounded bg-brand-50 text-brand-700 border border-brand-200">Systems</span>
+            </div>
+            <p class="text-[11px] text-slate-400 font-medium tracking-wide">Enterprise Security &amp; Infrastructure</p>
+          </div>
+        </div>
+
+        <!-- Desktop Navigation Items -->
+        <nav class="hidden md:flex items-center space-x-8 text-sm font-medium text-slate-600">
+          <a href="#overview" class="hover:text-brand-600 transition-colors">Overview</a>
+          <a href="#responsibilities" class="hover:text-brand-600 transition-colors">Responsibilities</a>
+          <a href="#qualifications" class="hover:text-brand-600 transition-colors">Qualifications</a>
+          <a href="#apply" class="hover:text-brand-600 transition-colors">Application</a>
+        </nav>
+
+        <!-- Right action / simulated badge -->
+        <div class="flex items-center gap-3">
+          <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-emerald-50 text-emerald-700 border border-emerald-200">
+            <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+            Hiring Actively
+          </span>
+          <a href="#apply" class="hidden sm:inline-flex items-center justify-center px-4 py-2 text-sm font-semibold rounded-lg bg-brand-600 text-white hover:bg-brand-700 transition shadow-sm">
+            Apply Now
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <main class="flex-1 max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-8">
+
+    <!-- Breadcrumb Navigation -->
+    <nav class="flex items-center space-x-2 text-xs sm:text-sm text-slate-500 mb-6" aria-label="Breadcrumb">
+      <a href="#" class="hover:text-slate-800 transition">Careers</a>
+      <i data-lucide="chevron-right" class="w-4 h-4 text-slate-400"></i>
+      <a href="#" class="hover:text-slate-800 transition">Security Engineering</a>
+      <i data-lucide="chevron-right" class="w-4 h-4 text-slate-400"></i>
+      <span class="text-slate-800 font-medium truncate">Systems &amp; Security Research Engineer</span>
+    </nav>
+
+    <!-- Job Header Card -->
+    <section class="bg-white border border-slate-200 rounded-2xl p-6 sm:p-8 shadow-sm mb-8 relative overflow-hidden">
+      <div class="absolute top-0 right-0 w-80 h-80 bg-brand-50/50 rounded-full blur-3xl pointer-events-none -mr-20 -mt-20"></div>
+
+      <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6 relative z-10">
+        <div class="space-y-3 max-w-3xl">
+          <div class="flex flex-wrap items-center gap-2">
+            <span class="px-2.5 py-1 rounded-md text-xs font-semibold bg-brand-50 text-brand-700 border border-brand-100">
+              R&amp;D Systems Lab
+            </span>
+            <span class="px-2.5 py-1 rounded-md text-xs font-semibold bg-slate-100 text-slate-600">
+              Req ID: SEC-2026-8841
+            </span>
+            <span class="px-2.5 py-1 rounded-md text-xs font-semibold bg-amber-50 text-amber-700 border border-amber-200">
+              High Priority
+            </span>
+          </div>
+          <h1 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-slate-900 tracking-tight">
+            Systems &amp; Security Research Engineer
+          </h1>
+          <p class="text-slate-600 text-base leading-relaxed">
+            Lead deep-tech exploration into zero-trust kernel isolation, cryptographic boundary validation, and hardened cloud microarchitectures.
+          </p>
+        </div>
+
+        <div class="flex flex-col sm:flex-row lg:flex-col gap-3 min-w-[200px]">
+          <a href="#apply" class="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-brand-600 text-white font-semibold shadow-md shadow-brand-600/20 hover:bg-brand-700 active:scale-[0.99] transition text-center">
+            <i data-lucide="send" class="w-4 h-4"></i>
+            Apply for Position
+          </a>
+          <button type="button" onclick="navigator.clipboard.writeText(window.location.href); alert('Link copied to clipboard');" class="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl border border-slate-200 bg-white text-slate-700 font-medium hover:bg-slate-50 transition text-sm">
+            <i data-lucide="share-2" class="w-4 h-4"></i>
+            Share Opportunity
+          </button>
+        </div>
+      </div>
+
+      <!-- Quick Meta Highlights -->
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-8 pt-6 border-t border-slate-100 text-sm">
+        <div class="flex items-center gap-3">
+          <div class="p-2.5 rounded-lg bg-slate-100 text-slate-600">
+            <i data-lucide="map-pin" class="w-4 h-4"></i>
+          </div>
+          <div>
+            <p class="text-xs text-slate-400 font-medium uppercase tracking-wider">Location</p>
+            <p class="font-semibold text-slate-800">San Francisco, CA (Hybrid)</p>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-3">
+          <div class="p-2.5 rounded-lg bg-slate-100 text-slate-600">
+            <i data-lucide="briefcase" class="w-4 h-4"></i>
+          </div>
+          <div>
+            <p class="text-xs text-slate-400 font-medium uppercase tracking-wider">Type</p>
+            <p class="font-semibold text-slate-800">Full-Time / Permanent</p>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-3">
+          <div class="p-2.5 rounded-lg bg-slate-100 text-slate-600">
+            <i data-lucide="dollar-sign" class="w-4 h-4"></i>
+          </div>
+          <div>
+            <p class="text-xs text-slate-400 font-medium uppercase tracking-wider">Compensation</p>
+            <p class="font-semibold text-slate-800">$185k - $240k + Equity</p>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-3">
+          <div class="p-2.5 rounded-lg bg-slate-100 text-slate-600">
+            <i data-lucide="cpu" class="w-4 h-4"></i>
+          </div>
+          <div>
+            <p class="text-xs text-slate-400 font-medium uppercase tracking-wider">Work Environment</p>
+            <p class="font-semibold text-slate-800">R&amp;D Systems Lab</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Two-Column Grid: Job Details & Application Form -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+      
+      <!-- Left Column: Job Description & Details (7 cols) -->
+      <section class="lg:col-span-7 space-y-8">
+
+        <!-- Overview Section -->
+        <article id="overview" class="bg-white border border-slate-200 rounded-2xl p-6 sm:p-8 shadow-sm">
+          <div class="flex items-center gap-2 mb-4 text-brand-700">
+            <i data-lucide="book-open" class="w-5 h-5"></i>
+            <h2 class="text-lg font-bold text-slate-900 tracking-tight">Job Overview</h2>
+          </div>
+          <p class="text-slate-600 leading-relaxed mb-4">
+            At Nexus Systems, our Security Research Lab safeguards foundational infrastructure supporting millions of mission-critical transactions daily. As a <strong>Systems &amp; Security Research Engineer</strong>, you will operate at the intersection of low-level OS internals, microarchitectural resilience, and cutting-edge distributed systems defense.
+          </p>
+          <p class="text-slate-600 leading-relaxed">
+            You will collaborate with world-class cryptographers, compiler engineers, and security analysts to probe vulnerabilities, prototype defensive kernel runtime primitives, and publish research findings that establish industry standards.
+          </p>
+        </article>
+
+        <!-- Responsibilities Section -->
+        <article id="responsibilities" class="bg-white border border-slate-200 rounded-2xl p-6 sm:p-8 shadow-sm">
+          <div class="flex items-center gap-2 mb-4 text-brand-700">
+            <i data-lucide="check-circle-2" class="w-5 h-5"></i>
+            <h2 class="text-lg font-bold text-slate-900 tracking-tight">Key Responsibilities</h2>
+          </div>
+          <ul class="space-y-3.5 text-slate-600">
+            <li class="flex items-start gap-3">
+              <span class="p-1 rounded-full bg-brand-50 text-brand-600 mt-0.5 shrink-0">
+                <i data-lucide="check" class="w-3.5 h-3.5"></i>
+              </span>
+              <span>Conduct in-depth vulnerability analysis, fuzzing, and penetration testing on operating system kernels, hypervisors, and hardware isolation layers.</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="p-1 rounded-full bg-brand-50 text-brand-600 mt-0.5 shrink-0">
+                <i data-lucide="check" class="w-3.5 h-3.5"></i>
+              </span>
+              <span>Architect automated threat detection instrumentation and secure sandboxing mechanisms for high-throughput cloud environments.</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="p-1 rounded-full bg-brand-50 text-brand-600 mt-0.5 shrink-0">
+                <i data-lucide="check" class="w-3.5 h-3.5"></i>
+              </span>
+              <span>Develop proof-of-concept exploits and defensive mitigations to protect next-generation containerized microservices and Kubernetes clusters.</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="p-1 rounded-full bg-brand-50 text-brand-600 mt-0.5 shrink-0">
+                <i data-lucide="check" class="w-3.5 h-3.5"></i>
+              </span>
+              <span>Author high-fidelity research documentation, RFCs, and academic publications, representing Nexus Systems at premier conferences.</span>
+            </li>
+          </ul>
+        </article>
+
+        <!-- Qualifications Section -->
+        <article id="qualifications" class="bg-white border border-slate-200 rounded-2xl p-6 sm:p-8 shadow-sm">
+          <div class="flex items-center gap-2 mb-4 text-brand-700">
+            <i data-lucide="award" class="w-5 h-5"></i>
+            <h2 class="text-lg font-bold text-slate-900 tracking-tight">Qualifications &amp; Experience</h2>
+          </div>
+          
+          <h3 class="text-sm font-semibold uppercase tracking-wider text-slate-500 mb-3">Minimum Qualifications</h3>
+          <ul class="space-y-3 text-slate-600 mb-6">
+            <li class="flex items-start gap-3">
+              <span class="w-1.5 h-1.5 rounded-full bg-brand-600 mt-2 shrink-0"></span>
+              <span>Bachelor’s, Master’s, or equivalent practical experience in Computer Science, Cybersecurity, or related STEM discipline.</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="w-1.5 h-1.5 rounded-full bg-brand-600 mt-2 shrink-0"></span>
+              <span>Demonstrated proficiency in low-level systems programming languages (C/C++, Rust) and scripting/automation with Python.</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="w-1.5 h-1.5 rounded-full bg-brand-600 mt-2 shrink-0"></span>
+              <span>Solid understanding of Linux kernel internals, virtual memory management, system calls, and network protocol stacks (TCP/IP, TLS).</span>
+            </li>
+          </ul>
+
+          <h3 class="text-sm font-semibold uppercase tracking-wider text-slate-500 mb-3">Preferred Qualifications</h3>
+          <ul class="space-y-3 text-slate-600">
+            <li class="flex items-start gap-3">
+              <span class="w-1.5 h-1.5 rounded-full bg-indigo-400 mt-2 shrink-0"></span>
+              <span>Experience with eBPF, secure enclave technology (Intel SGX, AWS Nitro Enclaves), or hypervisor virtualization primitives.</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="w-1.5 h-1.5 rounded-full bg-indigo-400 mt-2 shrink-0"></span>
+              <span>Prior contributions to open-source security tools or recognized vulnerability disclosures (CVEs).</span>
+            </li>
+          </ul>
+        </article>
+
+        <!-- What We Offer -->
+        <article class="bg-gradient-to-br from-slate-900 to-indigo-950 text-white rounded-2xl p-6 sm:p-8 shadow-sm">
+          <h3 class="text-lg font-bold tracking-tight mb-4 flex items-center gap-2">
+            <i data-lucide="sparkles" class="w-5 h-5 text-indigo-400"></i>
+            Total Rewards &amp; Culture
+          </h3>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm text-slate-300">
+            <div class="flex items-center gap-2.5">
+              <i data-lucide="check" class="w-4 h-4 text-indigo-400 shrink-0"></i>
+              <span>Comprehensive medical, dental &amp; vision (100% covered)</span>
+            </div>
+            <div class="flex items-center gap-2.5">
+              <i data-lucide="check" class="w-4 h-4 text-indigo-400 shrink-0"></i>
+              <span>$5,000 annual personal research &amp; conference budget</span>
+            </div>
+            <div class="flex items-center gap-2.5">
+              <i data-lucide="check" class="w-4 h-4 text-indigo-400 shrink-0"></i>
+              <span>Top-tier workstation hardware of your choice</span>
+            </div>
+            <div class="flex items-center gap-2.5">
+              <i data-lucide="check" class="w-4 h-4 text-indigo-400 shrink-0"></i>
+              <span>Flexible hybrid work with home office allowance</span>
+            </div>
+          </div>
+        </article>
+      </section>
+
+      <!-- Right Column: Interactive Application Form (5 cols) -->
+      <section id="apply" class="lg:col-span-5">
+        <div class="sticky top-24 bg-white border border-slate-200 rounded-2xl p-6 sm:p-7 shadow-lg shadow-slate-100">
+          
+          <div class="flex items-center justify-between border-b border-slate-100 pb-4 mb-5">
+            <div>
+              <h2 class="text-xl font-bold text-slate-900 tracking-tight">Candidate Application</h2>
+              <p class="text-xs text-slate-500 mt-0.5">Complete the form below to submit your profile.</p>
+            </div>
+            <div class="p-2 bg-brand-50 text-brand-600 rounded-lg">
+              <i data-lucide="file-text" class="w-5 h-5"></i>
+            </div>
+          </div>
+
+          <!-- Application Form -->
+          <form id="jobAppForm" class="space-y-4" novalidate>
+            
+            <!-- Resume Upload Drag-and-Drop Zone -->
+            <div>
+              <label class="block text-xs font-semibold uppercase tracking-wider text-slate-700 mb-1.5">
+                Resume / CV <span class="text-rose-500">*</span>
+              </label>
+              
+              <div 
+                id="dropZone" 
+                class="relative border-2 border-dashed border-slate-300 hover:border-brand-500 bg-slate-50/70 hover:bg-brand-50/30 transition-all rounded-xl p-5 text-center cursor-pointer group"
+              >
+                <input 
+                  type="file" 
+                  id="resumeInput" 
+                  accept=".pdf,.docx" 
+                  class="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10" 
+                />
+                
+                <!-- Initial Drop State -->
+                <div id="dropZoneContent" class="space-y-2 pointer-events-none">
+                  <div class="w-10 h-10 mx-auto rounded-full bg-white border border-slate-200 text-slate-500 group-hover:text-brand-600 group-hover:border-brand-200 flex items-center justify-center transition shadow-sm">
+                    <i data-lucide="upload-cloud" class="w-5 h-5"></i>
+                  </div>
+                  <div>
+                    <p class="text-xs font-medium text-slate-700">
+                      <span class="text-brand-600 font-semibold underline">Browse file</span> or drag &amp; drop here
+                    </p>
+                    <p class="text-[11px] text-slate-400 mt-0.5">Supports PDF and DOCX files (Max 15MB)</p>
+                  </div>
+                </div>
+
+                <!-- Parsing Simulation Indicator (Initially Hidden) -->
+                <div id="parsingIndicator" class="hidden py-3 space-y-2 pointer-events-none">
+                  <div class="w-8 h-8 mx-auto border-2 border-brand-200 border-t-brand-600 rounded-full animate-spin"></div>
+                  <p class="text-xs font-semibold text-brand-700 animate-pulse">Extracting resume details...</p>
+                  <p class="text-[11px] text-slate-400">Parsing candidate schema &amp; history</p>
+                </div>
+
+                <!-- File Loaded Badge (Initially Hidden) -->
+                <div id="fileLoadedState" class="hidden items-center justify-between bg-white border border-emerald-200 rounded-lg p-3 text-left">
+                  <div class="flex items-center gap-2.5 overflow-hidden">
+                    <div class="w-8 h-8 rounded bg-emerald-50 text-emerald-600 flex items-center justify-center shrink-0">
+                      <i data-lucide="file-check" class="w-4 h-4"></i>
+                    </div>
+                    <div class="truncate">
+                      <p id="loadedFileName" class="text-xs font-medium text-slate-800 truncate">resume.pdf</p>
+                      <p id="loadedFileSize" class="text-[10px] text-slate-400">142 KB</p>
+                    </div>
+                  </div>
+                  <button 
+                    type="button" 
+                    id="removeFileBtn" 
+                    class="p-1 rounded text-slate-400 hover:text-rose-500 hover:bg-slate-100 transition z-20"
+                    title="Remove file"
+                  >
+                    <i data-lucide="x" class="w-4 h-4"></i>
+                  </button>
+                </div>
+              </div>
+
+              <!-- Autofill notification badge -->
+              <div id="autofillSuccessNotice" class="hidden mt-2 p-2 rounded-lg bg-emerald-50 border border-emerald-200 text-[11px] text-emerald-800 flex items-center gap-1.5 fade-in">
+                <i data-lucide="sparkles" class="w-3.5 h-3.5 text-emerald-600 shrink-0"></i>
+                <span>Resume parsed! Form fields pre-filled from document.</span>
+              </div>
+              <p id="resumeError" class="hidden text-[11px] text-rose-600 mt-1 font-medium">Please attach a valid PDF or DOCX resume.</p>
+            </div>
+
+            <!-- Full Name -->
+            <div>
+              <label for="fullName" class="block text-xs font-semibold uppercase tracking-wider text-slate-700 mb-1">
+                Full Name <span class="text-rose-500">*</span>
+              </label>
+              <div class="relative">
+                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-400">
+                  <i data-lucide="user" class="w-4 h-4"></i>
+                </div>
+                <input 
+                  type="text" 
+                  id="fullName" 
+                  name="fullName" 
+                  required 
+                  placeholder="e.g. Alex Morgan" 
+                  class="w-full pl-9 pr-3 py-2 text-sm border border-slate-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition bg-white text-slate-900 placeholder:text-slate-400"
+                />
+              </div>
+              <p id="nameError" class="hidden text-[11px] text-rose-600 mt-1 font-medium">Full Name is required.</p>
+            </div>
+
+            <!-- Email Address & Phone Number (Side by side) -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div>
+                <label for="email" class="block text-xs font-semibold uppercase tracking-wider text-slate-700 mb-1">
+                  Email Address <span class="text-rose-500">*</span>
+                </label>
+                <div class="relative">
+                  <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-400">
+                    <i data-lucide="mail" class="w-4 h-4"></i>
+                  </div>
+                  <input 
+                    type="email" 
+                    id="email" 
+                    name="email" 
+                    required 
+                    placeholder="alex@example.com" 
+                    class="w-full pl-9 pr-3 py-2 text-sm border border-slate-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition bg-white text-slate-900 placeholder:text-slate-400"
+                  />
+                </div>
+                <p id="emailError" class="hidden text-[11px] text-rose-600 mt-1 font-medium">Valid email is required.</p>
+              </div>
+
+              <div>
+                <label for="phone" class="block text-xs font-semibold uppercase tracking-wider text-slate-700 mb-1">
+                  Phone Number <span class="text-rose-500">*</span>
+                </label>
+                <div class="relative">
+                  <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-400">
+                    <i data-lucide="phone" class="w-4 h-4"></i>
+                  </div>
+                  <input 
+                    type="tel" 
+                    id="phone" 
+                    name="phone" 
+                    required 
+                    placeholder="(555) 019-2834" 
+                    class="w-full pl-9 pr-3 py-2 text-sm border border-slate-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition bg-white text-slate-900 placeholder:text-slate-400"
+                  />
+                </div>
+                <p id="phoneError" class="hidden text-[11px] text-rose-600 mt-1 font-medium">Phone number is required.</p>
+              </div>
+            </div>
+
+            <!-- Current Role / Affiliation -->
+            <div>
+              <label for="currentRole" class="block text-xs font-semibold uppercase tracking-wider text-slate-700 mb-1">
+                Current Role / Title
+              </label>
+              <div class="relative">
+                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-400">
+                  <i data-lucide="briefcase" class="w-4 h-4"></i>
+                </div>
+                <input 
+                  type="text" 
+                  id="currentRole" 
+                  name="currentRole" 
+                  placeholder="e.g. Graduate Research Assistant" 
+                  class="w-full pl-9 pr-3 py-2 text-sm border border-slate-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition bg-white text-slate-900 placeholder:text-slate-400"
+                />
+              </div>
+            </div>
+
+            <!-- Skills Tag Input / Display -->
+            <div>
+              <label for="skillsInput" class="block text-xs font-semibold uppercase tracking-wider text-slate-700 mb-1">
+                Skills &amp; Technical Competencies
+              </label>
+              <input 
+                type="text" 
+                id="skillsInput" 
+                name="skills" 
+                placeholder="e.g. Python, Linux, Cloud Architecture, Network Security" 
+                class="w-full px-3 py-2 text-sm border border-slate-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition bg-white text-slate-900 placeholder:text-slate-400"
+              />
+              <div id="skillsChips" class="flex flex-wrap gap-1.5 mt-2"></div>
+            </div>
+
+            <!-- Online Profiles: LinkedIn & GitHub -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div>
+                <label for="linkedinUrl" class="block text-xs font-semibold uppercase tracking-wider text-slate-700 mb-1">
+                  LinkedIn URL
+                </label>
+                <div class="relative">
+                  <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-400">
+                    <i data-lucide="linkedin" class="w-4 h-4"></i>
+                  </div>
+                  <input 
+                    type="url" 
+                    id="linkedinUrl" 
+                    name="linkedinUrl" 
+                    placeholder="https://linkedin.com/in/username" 
+                    class="w-full pl-9 pr-3 py-2 text-sm border border-slate-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition bg-white text-slate-900 placeholder:text-slate-400"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label for="portfolioUrl" class="block text-xs font-semibold uppercase tracking-wider text-slate-700 mb-1">
+                  GitHub / Portfolio URL
+                </label>
+                <div class="relative">
+                  <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-400">
+                    <i data-lucide="globe" class="w-4 h-4"></i>
+                  </div>
+                  <input 
+                    type="url" 
+                    id="portfolioUrl" 
+                    name="portfolioUrl" 
+                    placeholder="https://github.com/username" 
+                    class="w-full pl-9 pr-3 py-2 text-sm border border-slate-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition bg-white text-slate-900 placeholder:text-slate-400"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <!-- Optional Cover Note -->
+            <div>
+              <label for="coverNote" class="block text-xs font-semibold uppercase tracking-wider text-slate-700 mb-1">
+                Cover Note <span class="text-slate-400 font-normal normal-case">(Optional)</span>
+              </label>
+              <textarea 
+                id="coverNote" 
+                name="coverNote" 
+                rows="3" 
+                placeholder="Share a brief note about your research interests or notable projects..." 
+                class="w-full px-3 py-2 text-sm border border-slate-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition bg-white text-slate-900 placeholder:text-slate-400 resize-none"
+              ></textarea>
+            </div>
+
+            <!-- Submission Button -->
+            <div class="pt-2">
+              <button 
+                type="submit" 
+                id="submitBtn" 
+                class="w-full py-3 px-4 rounded-xl bg-brand-600 hover:bg-brand-700 active:scale-[0.99] text-white font-semibold text-sm shadow-md shadow-brand-600/20 transition flex items-center justify-center gap-2 group"
+              >
+                <span>Submit Application</span>
+                <i data-lucide="arrow-right" class="w-4 h-4 group-hover:translate-x-0.5 transition-transform"></i>
+              </button>
+            </div>
+
+            <!-- Privacy Guarantee notice -->
+            <p class="text-[11px] text-slate-400 text-center flex items-center justify-center gap-1">
+              <i data-lucide="lock" class="w-3 h-3"></i>
+              <span>Client-side protected. Zero data retention policy.</span>
+            </p>
+
+          </form>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- Submission Confirmation Modal Overlay -->
+  <div id="confirmationModal" class="fixed inset-0 z-50 hidden bg-slate-950/60 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="bg-white border border-slate-200 rounded-2xl max-w-md w-full p-6 sm:p-8 shadow-2xl text-center fade-in relative overflow-hidden">
+      
+      <!-- Top decorative accent -->
+      <div class="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-brand-600 via-indigo-500 to-emerald-400"></div>
+
+      <!-- Success Trophy Icon -->
+      <div class="w-16 h-16 mx-auto mb-4 rounded-2xl bg-indigo-50 border border-indigo-100 text-brand-600 flex items-center justify-center shadow-inner">
+        <i data-lucide="trophy" class="w-8 h-8 text-brand-600"></i>
+      </div>
+
+      <!-- Prominent Victory / Confirmation Heading -->
+      <h3 id="modalVictoryHeading" class="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight capitalize mb-2">
+        team 10 won
+      </h3>
+
+      <!-- Secondary Academic Exercise Disclaimer Note -->
+      <div class="my-4 p-3.5 rounded-xl bg-slate-50 border border-slate-200 text-xs sm:text-sm text-slate-600 leading-relaxed">
+        This was a simulated academic exercise. No personal data or files were collected or stored.
+      </div>
+
+      <!-- Modal Action Button -->
+      <div class="mt-6 flex flex-col gap-2">
+        <button 
+          type="button" 
+          id="closeModalBtn" 
+          class="w-full py-2.5 px-4 rounded-xl bg-slate-900 hover:bg-slate-800 active:scale-[0.99] text-white font-semibold text-sm transition"
+        >
+          Dismiss &amp; Return to Portal
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="mt-16 border-t border-slate-200 bg-white py-8 text-center text-xs text-slate-500">
+    <div class="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div class="flex items-center gap-2">
+        <span class="font-bold text-slate-700">NEXUS SYSTEMS</span>
+        <span>&copy; 2026 Nexus Systems Corporation. All rights reserved.</span>
+      </div>
+      <div class="flex items-center space-x-6">
+        <span class="hover:underline cursor-pointer">Security Policy</span>
+        <span class="hover:underline cursor-pointer">Equal Opportunity Employer</span>
+        <span class="hover:underline cursor-pointer">Simulated Sandbox</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Client-Side Form & Simulation Controller Script -->
+  <script>
+    // Initialize Lucide icons
+    lucide.createIcons();
+
+    // DOM Elements
+    const dropZone = document.getElementById('dropZone');
+    const resumeInput = document.getElementById('resumeInput');
+    const dropZoneContent = document.getElementById('dropZoneContent');
+    const parsingIndicator = document.getElementById('parsingIndicator');
+    const fileLoadedState = document.getElementById('fileLoadedState');
+    const loadedFileName = document.getElementById('loadedFileName');
+    const loadedFileSize = document.getElementById('loadedFileSize');
+    const removeFileBtn = document.getElementById('removeFileBtn');
+    const autofillSuccessNotice = document.getElementById('autofillSuccessNotice');
+    const resumeError = document.getElementById('resumeError');
+
+    const jobAppForm = document.getElementById('jobAppForm');
+    const fullNameInput = document.getElementById('fullName');
+    const emailInput = document.getElementById('email');
+    const phoneInput = document.getElementById('phone');
+    const currentRoleInput = document.getElementById('currentRole');
+    const skillsInput = document.getElementById('skillsInput');
+    const skillsChips = document.getElementById('skillsChips');
+    const linkedinUrlInput = document.getElementById('linkedinUrl');
+    const portfolioUrlInput = document.getElementById('portfolioUrl');
+    const coverNoteInput = document.getElementById('coverNote');
+
+    const confirmationModal = document.getElementById('confirmationModal');
+    const closeModalBtn = document.getElementById('closeModalBtn');
+
+    // State Tracking
+    let uploadedFile = null;
+
+    // Helper: Render skill chips
+    function renderSkillChips(skillsArray) {
+      skillsChips.innerHTML = '';
+      skillsArray.forEach(skill => {
+        const trimmed = skill.trim();
+        if (!trimmed) return;
+        const chip = document.createElement('span');
+        chip.className = 'inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-medium bg-brand-50 text-brand-700 border border-brand-200';
+        chip.textContent = trimmed;
+        skillsChips.appendChild(chip);
+      });
+    }
+
+    // Handle File Selection / Drop
+    function handleSelectedFile(file) {
+      if (!file) return;
+
+      // Validate file extension
+      const validTypes = ['.pdf', '.docx'];
+      const fileExt = '.' + file.name.split('.').pop().toLowerCase();
+      if (!validTypes.includes(fileExt)) {
+        resumeError.textContent = 'Invalid file type. Please upload a .pdf or .docx file.';
+        resumeError.classList.remove('hidden');
+        return;
+      }
+
+      resumeError.classList.add('hidden');
+      uploadedFile = file;
+
+      // Show Parsing Indicator Simulation
+      dropZoneContent.classList.add('hidden');
+      fileLoadedState.classList.add('hidden');
+      parsingIndicator.classList.remove('hidden');
+
+      setTimeout(() => {
+        // Complete Parsing Simulation
+        parsingIndicator.classList.add('hidden');
+        fileLoadedState.classList.remove('hidden');
+        fileLoadedState.classList.add('flex');
+        
+        loadedFileName.textContent = file.name;
+        loadedFileSize.textContent = (file.size / 1024).toFixed(1) + ' KB';
+
+        // Pre-fill form fields with requested placeholder data
+        fullNameInput.value = 'Alex Morgan';
+        emailInput.value = 'alex.morgan@example.com';
+        phoneInput.value = '(555) 019-2834';
+        currentRoleInput.value = 'Graduate Research Assistant';
+        
+        const placeholderSkills = 'Python, Linux, Cloud Architecture, Network Security';
+        skillsInput.value = placeholderSkills;
+        renderSkillChips(placeholderSkills.split(','));
+
+        if (!linkedinUrlInput.value) {
+          linkedinUrlInput.value = 'https://linkedin.com/in/alex-morgan-research';
+        }
+        if (!portfolioUrlInput.value) {
+          portfolioUrlInput.value = 'https://github.com/alexmorgan-sec';
+        }
+
+        // Show notice banner
+        autofillSuccessNotice.classList.remove('hidden');
+        lucide.createIcons();
+      }, 950);
+    }
+
+    // Drag-and-drop Events
+    ['dragenter', 'dragover'].forEach(eventName => {
+      dropZone.addEventListener(eventName, (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        dropZone.classList.add('border-brand-500', 'bg-brand-50/50');
+      });
+    });
+
+    ['dragleave', 'drop'].forEach(eventName => {
+      dropZone.addEventListener(eventName, (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        dropZone.classList.remove('border-brand-500', 'bg-brand-50/50');
+      });
+    });
+
+    dropZone.addEventListener('drop', (e) => {
+      const dt = e.dataTransfer;
+      const files = dt.files;
+      if (files && files.length > 0) {
+        handleSelectedFile(files[0]);
+      }
+    });
+
+    resumeInput.addEventListener('change', (e) => {
+      if (e.target.files && e.target.files.length > 0) {
+        handleSelectedFile(e.target.files[0]);
+      }
+    });
+
+    // Remove uploaded file
+    removeFileBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      resetResumeZone();
+    });
+
+    function resetResumeZone() {
+      uploadedFile = null;
+      resumeInput.value = '';
+      fileLoadedState.classList.add('hidden');
+      fileLoadedState.classList.remove('flex');
+      parsingIndicator.classList.add('hidden');
+      dropZoneContent.classList.remove('hidden');
+      autofillSuccessNotice.classList.add('hidden');
+    }
+
+    // Dynamic skills chip updates on typing
+    skillsInput.addEventListener('input', (e) => {
+      renderSkillChips(e.target.value.split(','));
+    });
+
+    // Form Submission & Validation Handling
+    jobAppForm.addEventListener('submit', (e) => {
+      // Intercept submit immediately
+      e.preventDefault();
+
+      let hasError = false;
+
+      // Validate Resume
+      if (!uploadedFile) {
+        resumeError.textContent = 'Please attach your resume before submitting.';
+        resumeError.classList.remove('hidden');
+        hasError = true;
+      } else {
+        resumeError.classList.add('hidden');
+      }
+
+      // Validate Full Name
+      const nameError = document.getElementById('nameError');
+      if (!fullNameInput.value.trim()) {
+        nameError.classList.remove('hidden');
+        fullNameInput.classList.add('border-rose-500');
+        hasError = true;
+      } else {
+        nameError.classList.add('hidden');
+        fullNameInput.classList.remove('border-rose-500');
+      }
+
+      // Validate Email
+      const emailError = document.getElementById('emailError');
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailInput.value.trim() || !emailRegex.test(emailInput.value.trim())) {
+        emailError.classList.remove('hidden');
+        emailInput.classList.add('border-rose-500');
+        hasError = true;
+      } else {
+        emailError.classList.add('hidden');
+        emailInput.classList.remove('border-rose-500');
+      }
+
+      // Validate Phone
+      const phoneError = document.getElementById('phoneError');
+      if (!phoneInput.value.trim()) {
+        phoneError.classList.remove('hidden');
+        phoneInput.classList.add('border-rose-500');
+        hasError = true;
+      } else {
+        phoneError.classList.add('hidden');
+        phoneInput.classList.remove('border-rose-500');
+      }
+
+      if (hasError) {
+        return;
+      }
+
+      // On valid submission:
+      // 1. Reset all form inputs and states
+      jobAppForm.reset();
+      resetResumeZone();
+      skillsChips.innerHTML = '';
+
+      // 2. Display the prominent confirmation modal
+      confirmationModal.classList.remove('hidden');
+      lucide.createIcons();
+    });
+
+    // Close Confirmation Modal
+    closeModalBtn.addEventListener('click', () => {
+      confirmationModal.classList.add('hidden');
+    });
+
+    // Close modal on click outside
+    confirmationModal.addEventListener('click', (e) => {
+      if (e.target === confirmationModal) {
+        confirmationModal.classList.add('hidden');
+      }
+    });
+  </script>
+</body>
+</html>
+
