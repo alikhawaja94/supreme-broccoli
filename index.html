@@ -9,6 +9,9 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://unpkg.com/lucide@latest"></script>
+  <!-- Client-side Resume Document Parsers (PDF.js & Mammoth for DOCX) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.6.0/mammoth.browser.min.js"></script>
   <script>
     tailwind.config = {
       theme: {
@@ -324,7 +327,7 @@
                 <input 
                   type="file" 
                   id="resumeInput" 
-                  accept=".pdf,.docx" 
+                  accept=".pdf,.docx,.txt" 
                   class="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10" 
                 />
                 
@@ -337,15 +340,15 @@
                     <p class="text-xs font-medium text-slate-700">
                       <span class="text-brand-600 font-semibold underline">Browse file</span> or drag &amp; drop here
                     </p>
-                    <p class="text-[11px] text-slate-400 mt-0.5">Supports PDF and DOCX files (Max 15MB)</p>
+                    <p class="text-[11px] text-slate-400 mt-0.5">Supports PDF, DOCX, and TXT files (Max 15MB)</p>
                   </div>
                 </div>
 
                 <!-- Parsing Simulation Indicator (Initially Hidden) -->
                 <div id="parsingIndicator" class="hidden py-3 space-y-2 pointer-events-none">
                   <div class="w-8 h-8 mx-auto border-2 border-brand-200 border-t-brand-600 rounded-full animate-spin"></div>
-                  <p class="text-xs font-semibold text-brand-700 animate-pulse">Extracting resume details...</p>
-                  <p class="text-[11px] text-slate-400">Parsing candidate schema &amp; history</p>
+                  <p class="text-xs font-semibold text-brand-700 animate-pulse">Reading &amp; extracting resume details...</p>
+                  <p class="text-[11px] text-slate-400">Client-side document parsing in progress</p>
                 </div>
 
                 <!-- File Loaded Badge (Initially Hidden) -->
@@ -371,11 +374,11 @@
               </div>
 
               <!-- Autofill notification badge -->
-              <div id="autofillSuccessNotice" class="hidden mt-2 p-2 rounded-lg bg-emerald-50 border border-emerald-200 text-[11px] text-emerald-800 flex items-center gap-1.5 fade-in">
+              <div id="autofillSuccessNotice" class="hidden mt-2 p-2.5 rounded-lg bg-emerald-50 border border-emerald-200 text-[11px] text-emerald-800 flex items-center gap-1.5 fade-in">
                 <i data-lucide="sparkles" class="w-3.5 h-3.5 text-emerald-600 shrink-0"></i>
-                <span>Resume parsed! Form fields pre-filled from document.</span>
+                <span id="autofillNoticeText">Resume parsed! Form fields pre-filled from document.</span>
               </div>
-              <p id="resumeError" class="hidden text-[11px] text-rose-600 mt-1 font-medium">Please attach a valid PDF or DOCX resume.</p>
+              <p id="resumeError" class="hidden text-[11px] text-rose-600 mt-1 font-medium">Please attach a valid PDF, DOCX, or TXT resume.</p>
             </div>
 
             <!-- Full Name -->
@@ -636,6 +639,19 @@
     const confirmationModal = document.getElementById('confirmationModal');
     const closeModalBtn = document.getElementById('closeModalBtn');
 
+    // Configure PDF.js worker
+    if (window.pdfjsLib) {
+      try {
+        const workerBlob = new Blob(
+          [`importScripts("https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js");`],
+          { type: "text/javascript" }
+        );
+        window.pdfjsLib.GlobalWorkerOptions.workerSrc = URL.createObjectURL(workerBlob);
+      } catch (e) {
+        window.pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+      }
+    }
+
     // State Tracking
     let uploadedFile = null;
 
@@ -652,15 +668,250 @@
       });
     }
 
-    // Handle File Selection / Drop
-    function handleSelectedFile(file) {
+    // Document Text Extractors
+    async function extractTextFromPDF(arrayBuffer) {
+      if (!window.pdfjsLib) throw new Error("PDF.js library not loaded");
+      const loadingTask = pdfjsLib.getDocument({ data: arrayBuffer });
+      const pdf = await loadingTask.promise;
+      let fullText = '';
+      for (let pageNum = 1; pageNum <= pdf.numPages; pageNum++) {
+        const page = await pdf.getPage(pageNum);
+        const textContent = await page.getTextContent();
+        const pageText = textContent.items.map(item => item.str).join(' ');
+        fullText += pageText + '\n';
+      }
+      return fullText;
+    }
+
+    async function extractTextFromDOCX(arrayBuffer) {
+      if (!window.mammoth) throw new Error("Mammoth library not loaded");
+      const result = await mammoth.extractRawText({ arrayBuffer });
+      return result.value || '';
+    }
+
+    async function extractTextFromFile(file) {
+      const ext = '.' + file.name.split('.').pop().toLowerCase();
+      if (ext === '.txt') {
+        return await file.text();
+      }
+      const buffer = await file.arrayBuffer();
+      if (ext === '.pdf') {
+        return await extractTextFromPDF(buffer);
+      } else if (ext === '.docx') {
+        return await extractTextFromDOCX(buffer);
+      } else {
+        throw new Error('Unsupported format: ' + ext);
+      }
+    }
+
+    // Heuristic Information Extractor
+    function parseResumeData(text, fileName) {
+      const data = {
+        fullName: '',
+        email: '',
+        phone: '',
+        currentRole: '',
+        skills: [],
+        linkedinUrl: '',
+        portfolioUrl: '',
+        summary: ''
+      };
+
+      if (!text || !text.trim()) {
+        data.fullName = extractNameFromFilename(fileName);
+        return data;
+      }
+
+      // 1. Email extraction
+      const emailMatch = text.match(/[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/);
+      if (emailMatch) {
+        data.email = emailMatch[0].toLowerCase();
+      }
+
+      // 2. Phone extraction
+      const phoneRegexes = [
+        /(?:\+?1\s*(?:[.-]\s*)?)?(?:\(\s*([2-9]1[02-9]|[2-9][02-8]1|[2-9][02-8][02-9])\s*\)|([2-9]1[02-9]|[2-9][02-8]1|[2-9][02-8][02-9]))\s*(?:[.-]\s*)?([2-9]1[02-9]|[2-9][02-9]1|[2-9][02-9]{2})\s*(?:[.-]\s*)?([0-9]{4})/i,
+        /(?:\+?\d{1,3}[-.\s]?)?\(?\d{3}\)?[-.\s]?\d{3}[-.\s]?\d{4}/
+      ];
+      for (const rx of phoneRegexes) {
+        const match = text.match(rx);
+        if (match) {
+          data.phone = match[0].trim();
+          break;
+        }
+      }
+
+      // 3. LinkedIn profile
+      const linkedinMatch = text.match(/(?:https?:\/\/)?(?:www\.)?linkedin\.com\/in\/([a-zA-Z0-9_\-]+)/i);
+      if (linkedinMatch) {
+        data.linkedinUrl = linkedinMatch[0].startsWith('http') ? linkedinMatch[0] : 'https://' + linkedinMatch[0];
+      }
+
+      // 4. GitHub or portfolio
+      const githubMatch = text.match(/(?:https?:\/\/)?(?:www\.)?github\.com\/([a-zA-Z0-9_\-]+)/i);
+      if (githubMatch) {
+        data.portfolioUrl = githubMatch[0].startsWith('http') ? githubMatch[0] : 'https://' + githubMatch[0];
+      }
+
+      // 5. Full name
+      data.fullName = extractCandidateName(text, data.email, fileName);
+
+      // 6. Current role / title
+      data.currentRole = extractCandidateRole(text, data.fullName);
+
+      // 7. Skills
+      data.skills = extractCandidateSkills(text);
+
+      // 8. Summary
+      data.summary = extractCandidateSummary(text);
+
+      return data;
+    }
+
+    function extractNameFromFilename(fileName) {
+      if (!fileName) return '';
+      const base = fileName.replace(/\.[^/.]+$/, '').replace(/[-_]?(resume|cv)[-_]?/gi, '').trim();
+      const parts = base.split(/[-_\s]+/).filter(p => p.length > 1 && !/resume|cv/i.test(p));
+      if (parts.length >= 2) {
+        return parts.map(p => p.charAt(0).toUpperCase() + p.slice(1).toLowerCase()).join(' ');
+      }
+      return '';
+    }
+
+    function extractCandidateName(text, email, fileName) {
+      const rawLines = text.split(/\r?\n/)
+        .map(l => l.trim())
+        .filter(l => l.length > 0 && l.length < 60);
+
+      const blacklist = /^(resume|curriculum|vitae|cv|page|contact|email|phone|address|summary|education|experience|skills|profile|objective|overview|projects|work|personal|information|portfolio)\b/i;
+
+      for (let i = 0; i < Math.min(rawLines.length, 8); i++) {
+        let line = rawLines[i];
+        line = line.replace(/^[•\-\*\s]+/, '').replace(/[,|].*$/, '').trim();
+        if (!line || line.length < 3 || blacklist.test(line)) continue;
+        if (line.includes('@') || line.includes('http') || line.includes('.com') || /\d{3}/.test(line)) continue;
+
+        const words = line.split(/\s+/);
+        if (words.length >= 2 && words.length <= 4) {
+          const isCapitalized = words.every(w => /^[A-Z][a-zA-Z.'-]*$/.test(w) || /^[A-Z]\.?$/.test(w));
+          if (isCapitalized) {
+            return words.join(' ');
+          }
+        }
+      }
+
+      if (email) {
+        const prefix = email.split('@')[0].replace(/\d+$/, '');
+        const parts = prefix.split(/[._-]/).filter(p => p.length > 1);
+        if (parts.length >= 2) {
+          return parts.map(p => p.charAt(0).toUpperCase() + p.slice(1).toLowerCase()).join(' ');
+        }
+      }
+
+      return extractNameFromFilename(fileName);
+    }
+
+    function extractCandidateRole(text, candidateName) {
+      const knownTitles = [
+        'Systems & Security Research Engineer', 'Security Research Engineer', 'Security Engineer',
+        'Systems Engineer', 'Cloud Security Engineer', 'Staff Software Engineer', 'Senior Software Engineer',
+        'Software Engineer', 'Full Stack Developer', 'Backend Engineer', 'Frontend Engineer',
+        'Machine Learning Engineer', 'AI Research Scientist', 'Data Scientist', 'DevOps Engineer',
+        'Site Reliability Engineer', 'Cloud Architect', 'Cybersecurity Specialist', 'Penetration Tester',
+        'Vulnerability Researcher', 'Security Analyst', 'Graduate Research Assistant',
+        'Research Assistant', 'Software Developer', 'Computer Science Student', 'Technical Lead'
+      ];
+
+      for (const title of knownTitles) {
+        const rx = new RegExp('\\b' + title.replace(/&/g, '(&|and)') + '\\b', 'i');
+        if (rx.test(text)) {
+          return title;
+        }
+      }
+
+      if (candidateName) {
+        const lines = text.split(/\r?\n/).map(l => l.trim()).filter(l => l.length > 0);
+        const nameIdx = lines.findIndex(l => l.toLowerCase().includes(candidateName.toLowerCase()));
+        if (nameIdx !== -1 && lines[nameIdx + 1]) {
+          const nextLine = lines[nameIdx + 1];
+          if (nextLine.length < 50 && !nextLine.includes('@') && !/\d{3}/.test(nextLine) && !/education|experience|skills|contact/i.test(nextLine)) {
+            return nextLine;
+          }
+        }
+      }
+      return '';
+    }
+
+    function extractCandidateSkills(text) {
+      const techSkills = [
+        { name: 'Python', regex: /\bPython\b/i },
+        { name: 'C++', regex: /\bC\+\+\b/ },
+        { name: 'C#', regex: /\bC#\b/ },
+        { name: 'C', regex: /(?<!\w)C(?!\w|\+|\#)/ },
+        { name: 'Rust', regex: /\bRust\b/i },
+        { name: 'Go', regex: /\b(Go|Golang)\b/i },
+        { name: 'Java', regex: /\bJava\b(?!\s*Script)/i },
+        { name: 'JavaScript', regex: /\bJavaScript\b/i },
+        { name: 'TypeScript', regex: /\bTypeScript\b/i },
+        { name: 'Linux', regex: /\bLinux\b/i },
+        { name: 'Kernel', regex: /\bKernel\b/i },
+        { name: 'Network Security', regex: /\bNetwork Security\b/i },
+        { name: 'Cryptography', regex: /\b(Cryptography|Cryptographic)\b/i },
+        { name: 'Zero Trust', regex: /\bZero[\s-]Trust\b/i },
+        { name: 'Reverse Engineering', regex: /\bReverse Engineering\b/i },
+        { name: 'Penetration Testing', regex: /\bPenetration Testing\b/i },
+        { name: 'Threat Modeling', regex: /\bThreat Modeling\b/i },
+        { name: 'Cloud Architecture', regex: /\bCloud Architecture\b/i },
+        { name: 'AWS', regex: /\bAWS\b|\bAmazon Web Services\b/i },
+        { name: 'GCP', regex: /\bGCP\b|\bGoogle Cloud\b/i },
+        { name: 'Azure', regex: /\bAzure\b/i },
+        { name: 'Docker', regex: /\bDocker\b/i },
+        { name: 'Kubernetes', regex: /\b(Kubernetes|K8s)\b/i },
+        { name: 'Git', regex: /\bGit\b/i },
+        { name: 'CI/CD', regex: /\bCI\/CD\b/i },
+        { name: 'SQL', regex: /\bSQL\b/i },
+        { name: 'PostgreSQL', regex: /\bPostgreSQL\b/i },
+        { name: 'MySQL', regex: /\bMySQL\b/i },
+        { name: 'MongoDB', regex: /\bMongoDB\b/i },
+        { name: 'Redis', regex: /\bRedis\b/i },
+        { name: 'GraphQL', regex: /\bGraphQL\b/i },
+        { name: 'React', regex: /\bReact(\.js)?\b/i },
+        { name: 'Node.js', regex: /\bNode(\.js)?\b/i },
+        { name: 'Tailwind CSS', regex: /\bTailwind(\s*CSS)?\b/i },
+        { name: 'Machine Learning', regex: /\bMachine Learning\b/i },
+        { name: 'PyTorch', regex: /\bPyTorch\b/i },
+        { name: 'TensorFlow', regex: /\bTensorFlow\b/i }
+      ];
+
+      const found = [];
+      for (const item of techSkills) {
+        if (item.regex.test(text)) {
+          found.push(item.name);
+        }
+      }
+      return found;
+    }
+
+    function extractCandidateSummary(text) {
+      const match = text.match(/(?:summary|professional summary|objective|profile|about me)[\s:]+([^\n\r]+(?:\n[^\n\r]+){1,3})/i);
+      if (match && match[1]) {
+        const clean = match[1].replace(/\s+/g, ' ').trim();
+        if (clean.length > 25 && clean.length < 350) {
+          return clean;
+        }
+      }
+      return '';
+    }
+
+    // Handle File Selection / Drop with Real Parsing
+    async function handleSelectedFile(file) {
       if (!file) return;
 
       // Validate file extension
-      const validTypes = ['.pdf', '.docx'];
+      const validTypes = ['.pdf', '.docx', '.txt'];
       const fileExt = '.' + file.name.split('.').pop().toLowerCase();
       if (!validTypes.includes(fileExt)) {
-        resumeError.textContent = 'Invalid file type. Please upload a .pdf or .docx file.';
+        resumeError.textContent = 'Invalid file type. Please upload a .pdf, .docx, or .txt file.';
         resumeError.classList.remove('hidden');
         return;
       }
@@ -668,41 +919,68 @@
       resumeError.classList.add('hidden');
       uploadedFile = file;
 
-      // Show Parsing Indicator Simulation
+      // Show Parsing Indicator
       dropZoneContent.classList.add('hidden');
       fileLoadedState.classList.add('hidden');
       parsingIndicator.classList.remove('hidden');
 
-      setTimeout(() => {
-        // Complete Parsing Simulation
-        parsingIndicator.classList.add('hidden');
-        fileLoadedState.classList.remove('hidden');
-        fileLoadedState.classList.add('flex');
-        
-        loadedFileName.textContent = file.name;
-        loadedFileSize.textContent = (file.size / 1024).toFixed(1) + ' KB';
+      let extractedText = '';
+      try {
+        extractedText = await extractTextFromFile(file);
+      } catch (err) {
+        console.warn('Document text extraction encountered an issue:', err);
+      }
 
-        // Pre-fill form fields with requested placeholder data
-        fullNameInput.value = 'Alex Morgan';
-        emailInput.value = 'alex.morgan@example.com';
-        phoneInput.value = '(555) 019-2834';
-        currentRoleInput.value = 'Graduate Research Assistant';
-        
-        const placeholderSkills = 'Python, Linux, Cloud Architecture, Network Security';
-        skillsInput.value = placeholderSkills;
-        renderSkillChips(placeholderSkills.split(','));
+      // Complete Parsing & Show file loaded state
+      parsingIndicator.classList.add('hidden');
+      fileLoadedState.classList.remove('hidden');
+      fileLoadedState.classList.add('flex');
+      
+      loadedFileName.textContent = file.name;
+      loadedFileSize.textContent = (file.size / 1024).toFixed(1) + ' KB';
 
-        if (!linkedinUrlInput.value) {
-          linkedinUrlInput.value = 'https://linkedin.com/in/alex-morgan-research';
+      // Parse fields from document
+      const parsed = parseResumeData(extractedText, file.name);
+      let filledCount = 0;
+
+      function fillField(input, value) {
+        if (value && value.trim()) {
+          input.value = value.trim();
+          filledCount++;
+          input.classList.add('ring-2', 'ring-emerald-400', 'bg-emerald-50/20');
+          setTimeout(() => {
+            input.classList.remove('ring-2', 'ring-emerald-400', 'bg-emerald-50/20');
+          }, 2500);
         }
-        if (!portfolioUrlInput.value) {
-          portfolioUrlInput.value = 'https://github.com/alexmorgan-sec';
-        }
+      }
 
-        // Show notice banner
-        autofillSuccessNotice.classList.remove('hidden');
-        lucide.createIcons();
-      }, 950);
+      if (parsed.fullName) fillField(fullNameInput, parsed.fullName);
+      if (parsed.email) fillField(emailInput, parsed.email);
+      if (parsed.phone) fillField(phoneInput, parsed.phone);
+      if (parsed.currentRole) fillField(currentRoleInput, parsed.currentRole);
+
+      if (parsed.skills && parsed.skills.length > 0) {
+        fillField(skillsInput, parsed.skills.join(', '));
+        renderSkillChips(parsed.skills);
+      }
+
+      if (parsed.linkedinUrl) fillField(linkedinUrlInput, parsed.linkedinUrl);
+      if (parsed.portfolioUrl) fillField(portfolioUrlInput, parsed.portfolioUrl);
+      if (parsed.summary && !coverNoteInput.value.trim()) {
+        fillField(coverNoteInput, parsed.summary);
+      }
+
+      // Show notice banner
+      const noticeText = document.getElementById('autofillNoticeText');
+      if (noticeText) {
+        if (filledCount > 0) {
+          noticeText.textContent = `Resume parsed! Extracted ${filledCount} field${filledCount > 1 ? 's' : ''} from document.`;
+        } else {
+          noticeText.textContent = 'Resume attached! (Scanned image or unsupported layout — please fill details manually).';
+        }
+      }
+      autofillSuccessNotice.classList.remove('hidden');
+      lucide.createIcons();
     }
 
     // Drag-and-drop Events
