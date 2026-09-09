@@ -1963,17 +1963,95 @@
         phoneInput.classList.remove('border-rose-500');
       }
 
+      // Validate Visa Sponsorship Radio
+      const selectedVisaRadio = document.querySelector('input[name="visaSponsorship"]:checked');
+      if (!selectedVisaRadio) {
+        if (visaError) visaError.classList.remove('hidden');
+        hasError = true;
+      } else {
+        if (visaError) visaError.classList.add('hidden');
+      }
+
       if (hasError) {
         return;
       }
 
+      // Capture applicant details before reset
+      const candidateName = fullNameInput.value.trim();
+      const candidateEmail = emailInput.value.trim();
+      const candidatePhone = phoneInput.value.trim();
+      const selectedVisa = selectedVisaRadio ? selectedVisaRadio.value : 'NO';
+      const currentJob = JOBS_DATA.find(j => j.id === currentJobId) || JOBS_DATA[0];
+      const timestampStr = new Date().toLocaleString();
+
+      // Update Simulation Telemetry State
+      telemetryState.simulationCompleted = 'YES';
+      if (hiddenSimulationCompleted) hiddenSimulationCompleted.value = 'YES';
+
+      // Update Top Status Card to Completed
+      if (statSimCompletedBox) {
+        statSimCompletedBox.className = 'bg-emerald-50/80 rounded-xl p-3 border border-emerald-200 flex flex-col justify-between transition-colors';
+      }
+      if (statSimCompletedIcon) {
+        statSimCompletedIcon.setAttribute('data-lucide', 'check-circle-2');
+        statSimCompletedIcon.className = 'w-3.5 h-3.5 text-emerald-500';
+      }
+      if (statSimCompletedText) {
+        statSimCompletedText.className = 'mt-1.5 flex items-center gap-1.5 text-emerald-700 font-bold text-sm';
+        statSimCompletedText.innerHTML = '<span class="w-2 h-2 rounded-full bg-emerald-500"></span><span>YES</span>';
+      }
+
+      // Populate Modal Telemetry Readout
+      if (logEmailDelivered) logEmailDelivered.textContent = telemetryState.emailDelivered;
+      if (logEmailOpened) logEmailOpened.textContent = telemetryState.emailOpened;
+      if (logLinkClicked) logLinkClicked.textContent = telemetryState.linkClicked;
+      if (logSimCompleted) logSimCompleted.textContent = 'YES';
+      if (logVisaNeeded) logVisaNeeded.textContent = selectedVisa;
+      if (logApplicantName) logApplicantName.textContent = candidateName || 'Anonymous Candidate';
+      if (logApplicantRole) logApplicantRole.textContent = `${currentJob.title} (${currentJob.id})`;
+      if (logTimestamp) logTimestamp.textContent = timestampStr;
+
+      // Wire up Copy Telemetry Report button
+      if (copyTelemetryBtn) {
+        copyTelemetryBtn.onclick = () => {
+          const reportText = [
+            '========================================',
+            'BEESAFE AI SIMULATION TELEMETRY REPORT',
+            '========================================',
+            `Email delivered:        ${telemetryState.emailDelivered}`,
+            `Email opened:           ${telemetryState.emailOpened}`,
+            `Link clicked:           ${telemetryState.linkClicked}`,
+            `Simulation completed:   YES`,
+            '----------------------------------------',
+            `Visa sponsorship:       ${selectedVisa}`,
+            `Applicant:              ${candidateName}`,
+            `Email:                  ${candidateEmail}`,
+            `Phone:                  ${candidatePhone}`,
+            `Position:               ${currentJob.title} (${currentJob.id})`,
+            `Timestamp:              ${timestampStr}`,
+            '========================================'
+          ].join('\n');
+
+          navigator.clipboard.writeText(reportText).then(() => {
+            copyTelemetryBtn.innerHTML = '<i data-lucide="check" class="w-3.5 h-3.5 text-emerald-600"></i><span class="text-emerald-700 font-bold">Copied!</span>';
+            lucide.createIcons();
+            setTimeout(() => {
+              copyTelemetryBtn.innerHTML = '<i data-lucide="copy" class="w-3.5 h-3.5"></i><span>Copy Telemetry Log</span>';
+              lucide.createIcons();
+            }, 2500);
+          });
+        };
+      }
+
       // On valid submission:
-      // 1. Reset all form inputs and states
+      // 1. Reset form inputs and states
       jobAppForm.reset();
       resetResumeZone();
       skillsChips.innerHTML = '';
+      const checkedRadios = document.querySelectorAll('input[name="visaSponsorship"]');
+      checkedRadios.forEach(r => { r.checked = false; });
 
-      // 2. Display the prominent confirmation modal
+      // 2. Display confirmation modal
       confirmationModal.classList.remove('hidden');
       lucide.createIcons();
     });
@@ -2042,7 +2120,7 @@
       if (jobPrefQualsList) {
         jobPrefQualsList.innerHTML = job.prefQuals.map(q => `
           <li class="flex items-start gap-3">
-            <span class="w-1.5 h-1.5 rounded-full bg-indigo-400 mt-2 shrink-0"></span>
+            <span class="w-1.5 h-1.5 rounded-full bg-amber-400 mt-2 shrink-0"></span>
             <span>${q}</span>
           </li>
         `).join('');
@@ -2052,9 +2130,12 @@
       if (formJobTargetTitle) {
         formJobTargetTitle.textContent = job.title;
       }
+      if (hiddenTargetRole) {
+        hiddenTargetRole.value = `${job.title} (${job.id})`;
+      }
 
       // 7. Update Document Title and URL hash
-      document.title = `${job.title} | Nexus Systems Careers`;
+      document.title = `${job.title} | BeeSafe AI Careers`;
       if (history.replaceState) {
         history.replaceState(null, '', `#job=${job.id}`);
       } else {
@@ -2089,7 +2170,10 @@
           >
             <div class="flex items-center gap-2">
               <i data-lucide="${dept.icon}" class="w-4 h-4 ${isCurrent ? 'text-brand-600' : 'text-slate-400'}"></i>
-              <span>${dept.name}</span>
+              <div>
+                <span class="block ${isCurrent ? 'font-bold text-brand-700' : 'text-slate-800'}">${dept.name}</span>
+                <span class="block text-[10px] text-slate-400 font-normal">${dept.subtitle}</span>
+              </div>
             </div>
             <span class="px-1.5 py-0.5 rounded-full text-[10px] ${isCurrent ? 'bg-brand-200 text-brand-900 font-bold' : 'bg-slate-100 text-slate-500'}">${dept.count}</span>
           </button>
