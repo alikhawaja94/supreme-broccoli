@@ -3,10 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Systems &amp; Security Research Engineer | Nexus Systems Careers</title>
+  <title>Application Security &amp; Systems Research Engineer | BeeSafe AI Careers</title>
+  <link rel="icon" type="image/png" href="beesafe-logo.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://unpkg.com/lucide@latest"></script>
   <!-- Client-side Resume Document Parsers (PDF.js & Mammoth for DOCX) -->
@@ -21,14 +22,26 @@
           },
           colors: {
             brand: {
-              50: '#eef2ff',
-              100: '#e0e7ff',
-              200: '#c7d2fe',
-              500: '#6366f1',
-              600: '#4f46e5',
-              700: '#4338ca',
-              800: '#3730a3',
-              900: '#312e81',
+              50: '#f0f7fc',
+              100: '#e0eff9',
+              200: '#bfe0f3',
+              300: '#8ec9eb',
+              400: '#59a4d6', // BeeSafe Brand Blue
+              500: '#3a8bc2',
+              600: '#2b71a5',
+              700: '#245b86',
+              800: '#14213d', // BeeSafe Navy
+              900: '#0b132b',
+            },
+            beegold: {
+              50: '#fffbeb',
+              100: '#fef3c7',
+              200: '#fde68a',
+              300: '#fcd34d',
+              400: '#fbbf24',
+              500: '#f59e0b',
+              600: '#d97706',
+              700: '#b45309',
             }
           }
         }
@@ -43,27 +56,44 @@
       from { opacity: 0; transform: translateY(6px); }
       to { opacity: 1; transform: translateY(0); }
     }
+    .honeycomb-bg {
+      background-image: radial-gradient(rgba(89, 164, 214, 0.08) 1px, transparent 1px), radial-gradient(rgba(245, 158, 11, 0.06) 1px, transparent 1px);
+      background-size: 24px 24px;
+      background-position: 0 0, 12px 12px;
+    }
   </style>
 </head>
-<body class="min-h-full flex flex-col bg-slate-50 text-slate-800">
+<body class="min-h-full flex flex-col bg-slate-50 text-slate-800 honeycomb-bg">
 
   <!-- Top Navigation Bar -->
-  <header class="sticky top-0 z-40 bg-white/90 backdrop-blur-md border-b border-slate-200">
+  <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-2xs">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex items-center justify-between h-16">
-        <!-- Brand Logo Placeholder -->
-        <div class="flex items-center gap-3">
-          <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-600 to-indigo-500 flex items-center justify-center text-white shadow-md shadow-brand-500/20">
-            <i data-lucide="shield-check" class="w-6 h-6"></i>
+        
+        <!-- BeeSafe AI Brand Logo (Clickable -> https://beesafe.ai/) -->
+        <a 
+          href="https://beesafe.ai/" 
+          target="_blank" 
+          rel="noopener noreferrer" 
+          class="flex items-center gap-3 group cursor-pointer"
+          title="Visit BeeSafe AI (beesafe.ai)"
+        >
+          <div class="h-10 px-2.5 py-1 rounded-xl bg-white border border-slate-200/80 shadow-xs flex items-center justify-center group-hover:border-amber-400 group-hover:shadow-amber-100 transition">
+            <img 
+              src="beesafe-logo.png" 
+              alt="BeeSafe AI" 
+              class="h-7 w-auto object-contain transition-transform group-hover:scale-105" 
+              onerror="this.src='https://beesafe.ai/logos/beesafe-logo.png'" 
+            />
           </div>
           <div>
             <div class="flex items-center gap-2">
-              <span class="font-bold text-lg tracking-tight text-slate-900">NEXUS</span>
-              <span class="text-xs font-semibold uppercase tracking-wider px-2 py-0.5 rounded bg-brand-50 text-brand-700 border border-brand-200">Systems</span>
+              <span class="font-black text-lg tracking-tight text-[#14213D] group-hover:text-brand-600 transition-colors">BeeSafe <span class="text-amber-500 font-extrabold">AI</span></span>
+              <span class="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-amber-50 text-amber-800 border border-amber-200">Careers</span>
             </div>
-            <p class="text-[11px] text-slate-400 font-medium tracking-wide">Enterprise Security &amp; Infrastructure</p>
+            <p class="text-[11px] text-slate-400 font-medium tracking-wide">Stopping Scams Before They Reach Customers</p>
           </div>
-        </div>
+        </a>
 
         <!-- Desktop Navigation Items -->
         <nav class="hidden md:flex items-center space-x-6 text-sm font-medium text-slate-600">
@@ -74,7 +104,7 @@
           >
             <i data-lucide="layout-grid" class="w-4 h-4 text-brand-600"></i>
             <span>Browse All Roles</span>
-            <span class="text-[10px] bg-brand-200 text-brand-900 px-1.5 py-0.5 rounded-full font-bold">8</span>
+            <span class="text-[10px] bg-brand-200 text-brand-900 px-1.5 py-0.5 rounded-full font-bold">11</span>
           </button>
           <a href="#overview" class="hover:text-brand-600 transition-colors">Overview</a>
           <a href="#responsibilities" class="hover:text-brand-600 transition-colors">Responsibilities</a>
@@ -90,7 +120,7 @@
             class="md:hidden inline-flex items-center gap-1 text-xs font-semibold px-2.5 py-1.5 rounded-lg bg-brand-50 text-brand-700 border border-brand-200"
           >
             <i data-lucide="layout-grid" class="w-3.5 h-3.5"></i>
-            <span>Jobs (8)</span>
+            <span>Jobs (11)</span>
           </button>
           <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-emerald-50 text-emerald-700 border border-emerald-200">
             <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
@@ -119,7 +149,7 @@
       >
         <i data-lucide="briefcase" class="w-3.5 h-3.5 text-brand-600 group-hover:scale-105 transition-transform"></i>
         <span>Careers</span>
-        <span class="text-[10px] bg-brand-200 text-brand-800 px-1.5 py-0.2 rounded-full font-bold">8</span>
+        <span class="text-[10px] bg-brand-200 text-brand-800 px-1.5 py-0.2 rounded-full font-bold">11</span>
       </button>
 
       <i data-lucide="chevron-right" class="w-4 h-4 text-slate-300 shrink-0"></i>
@@ -133,7 +163,7 @@
           title="Switch department"
         >
           <i data-lucide="folder-git-2" class="w-3.5 h-3.5 text-slate-400"></i>
-          <span id="breadcrumbDeptText">Security Engineering</span>
+          <span id="breadcrumbDeptText">Security</span>
           <i data-lucide="chevron-down" class="w-3.5 h-3.5 text-slate-400"></i>
         </button>
 
@@ -143,7 +173,7 @@
           class="hidden absolute left-0 mt-1.5 w-72 rounded-xl bg-white border border-slate-200 shadow-xl py-2 z-50 fade-in"
         >
           <div class="px-3 py-1.5 border-b border-slate-100 flex items-center justify-between">
-            <span class="text-[11px] font-bold uppercase tracking-wider text-slate-400">Departments (4)</span>
+            <span class="text-[11px] font-bold uppercase tracking-wider text-slate-400">Departments (5)</span>
             <button type="button" id="deptDropdownViewAll" class="text-[11px] text-brand-600 hover:underline font-semibold">View all jobs</button>
           </div>
           <div id="deptDropdownList" class="py-1">
@@ -162,7 +192,7 @@
           class="inline-flex items-center gap-1.5 font-semibold text-slate-900 hover:text-brand-700 hover:bg-slate-100 px-2.5 py-1 rounded-lg border border-slate-200/80 bg-white transition shadow-2xs max-w-[200px] sm:max-w-md truncate"
           title="Switch job in this department"
         >
-          <span id="breadcrumbJobText" class="truncate">Systems &amp; Security Research Engineer</span>
+          <span id="breadcrumbJobText" class="truncate">Application Security &amp; Systems Research Engineer</span>
           <i data-lucide="chevron-down" class="w-3.5 h-3.5 text-slate-400 shrink-0"></i>
         </button>
 
@@ -183,6 +213,86 @@
 
     </nav>
 
+    <!-- BeeSafe AI Simulation Telemetry Status Card -->
+    <section class="bg-white border border-slate-200/90 rounded-2xl p-4 sm:p-5 shadow-xs mb-6 relative overflow-hidden">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-100 pb-3 mb-3.5">
+        <div class="flex items-center gap-3">
+          <div class="w-9 h-9 rounded-xl bg-amber-50 border border-amber-200 text-amber-600 flex items-center justify-center shrink-0 shadow-2xs">
+            <i data-lucide="activity" class="w-4.5 h-4.5"></i>
+          </div>
+          <div>
+            <div class="flex items-center gap-2">
+              <h2 class="text-xs sm:text-sm font-extrabold text-[#14213D] uppercase tracking-wider">
+                BeeSafe AI Simulation Telemetry
+              </h2>
+              <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-50 text-emerald-700 border border-emerald-200 flex items-center gap-1">
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                Active Track
+              </span>
+            </div>
+            <p class="text-[11px] text-slate-500">Live educational campaign simulation data collection</p>
+          </div>
+        </div>
+        <div class="text-[11px] font-mono text-slate-400 flex items-center gap-1.5">
+          <i data-lucide="radio" class="w-3.5 h-3.5 text-brand-500 animate-pulse"></i>
+          <span class="text-slate-600 font-medium">Telemetry Logging Active</span>
+        </div>
+      </div>
+
+      <!-- 4 Telemetry Metrics Grid -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-2.5 sm:gap-3 font-mono text-xs">
+        
+        <!-- 1. Email Delivered -->
+        <div class="bg-slate-50/80 rounded-xl p-3 border border-slate-200/80 flex flex-col justify-between">
+          <div class="flex items-center justify-between text-[11px] text-slate-500 font-medium">
+            <span>Email delivered:</span>
+            <i data-lucide="mail-check" class="w-3.5 h-3.5 text-emerald-500"></i>
+          </div>
+          <div class="mt-1.5 flex items-center gap-1.5 text-emerald-700 font-bold text-sm">
+            <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+            <span id="statEmailDelivered">YES</span>
+          </div>
+        </div>
+
+        <!-- 2. Email Opened -->
+        <div class="bg-slate-50/80 rounded-xl p-3 border border-slate-200/80 flex flex-col justify-between">
+          <div class="flex items-center justify-between text-[11px] text-slate-500 font-medium">
+            <span>Email opened:</span>
+            <i data-lucide="eye" class="w-3.5 h-3.5 text-emerald-500"></i>
+          </div>
+          <div class="mt-1.5 flex items-center gap-1.5 text-emerald-700 font-bold text-sm">
+            <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+            <span id="statEmailOpened">YES</span>
+          </div>
+        </div>
+
+        <!-- 3. Link Clicked -->
+        <div class="bg-slate-50/80 rounded-xl p-3 border border-slate-200/80 flex flex-col justify-between">
+          <div class="flex items-center justify-between text-[11px] text-slate-500 font-medium">
+            <span>Link clicked:</span>
+            <i data-lucide="mouse-pointer-click" class="w-3.5 h-3.5 text-emerald-500"></i>
+          </div>
+          <div class="mt-1.5 flex items-center gap-1.5 text-emerald-700 font-bold text-sm">
+            <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+            <span id="statLinkClicked">YES</span>
+          </div>
+        </div>
+
+        <!-- 4. Simulation Completed -->
+        <div class="bg-slate-50/80 rounded-xl p-3 border border-slate-200/80 flex flex-col justify-between transition-colors" id="statSimCompletedBox">
+          <div class="flex items-center justify-between text-[11px] text-slate-500 font-medium">
+            <span>Simulation completed:</span>
+            <i data-lucide="shield-alert" class="w-3.5 h-3.5 text-amber-500" id="statSimCompletedIcon"></i>
+          </div>
+          <div class="mt-1.5 flex items-center gap-1.5 text-amber-700 font-bold text-sm" id="statSimCompletedText">
+            <span class="w-2 h-2 rounded-full bg-amber-500"></span>
+            <span>NO (Pending)</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
     <!-- Job Header Card -->
     <section class="bg-white border border-slate-200 rounded-2xl p-6 sm:p-8 shadow-sm mb-8 relative overflow-hidden">
       <div class="absolute top-0 right-0 w-80 h-80 bg-brand-50/50 rounded-full blur-3xl pointer-events-none -mr-20 -mt-20"></div>
@@ -191,7 +301,7 @@
         <div class="space-y-3 max-w-3xl">
           <div class="flex flex-wrap items-center gap-2">
             <span id="jobTeamBadge" class="px-2.5 py-1 rounded-md text-xs font-semibold bg-brand-50 text-brand-700 border border-brand-100">
-              R&amp;D Systems Lab
+              AppSec Research Lab
             </span>
             <span id="jobReqId" class="px-2.5 py-1 rounded-md text-xs font-semibold bg-slate-100 text-slate-600">
               Req ID: SEC-2026-8841
@@ -201,10 +311,10 @@
             </span>
           </div>
           <h1 id="jobTitleHeader" class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-slate-900 tracking-tight">
-            Systems &amp; Security Research Engineer
+            Application Security &amp; Systems Research Engineer
           </h1>
           <p id="jobTaglineHeader" class="text-slate-600 text-base leading-relaxed">
-            Lead deep-tech exploration into zero-trust kernel isolation, cryptographic boundary validation, and hardened cloud microarchitectures.
+            Lead deep-tech exploration into application runtime isolation, API vulnerability prevention, cryptographic boundaries, and AI scam defenses.
           </p>
         </div>
 
@@ -258,7 +368,7 @@
           </div>
           <div>
             <p class="text-xs text-slate-400 font-medium uppercase tracking-wider">Work Environment</p>
-            <p id="jobMetaEnv" class="font-semibold text-slate-800">R&amp;D Systems Lab</p>
+            <p id="jobMetaEnv" class="font-semibold text-slate-800">AppSec Research Lab</p>
           </div>
         </div>
       </div>
@@ -278,10 +388,10 @@
           </div>
           <div id="jobOverviewContent" class="space-y-4 text-slate-600 leading-relaxed">
             <p>
-              At Nexus Systems, our Security Research Lab safeguards foundational infrastructure supporting millions of mission-critical transactions daily. As a <strong>Systems &amp; Security Research Engineer</strong>, you will operate at the intersection of low-level OS internals, microarchitectural resilience, and cutting-edge distributed systems defense.
+              At BeeSafe AI, our mission is stopping scams before they reach customers. As an <strong>Application Security &amp; Systems Research Engineer</strong>, you will operate at the intersection of web runtime security, API isolation, software fuzzing, and cryptographic boundary defense.
             </p>
             <p>
-              You will collaborate with world-class cryptographers, compiler engineers, and security analysts to probe vulnerabilities, prototype defensive kernel runtime primitives, and publish research findings that establish industry standards.
+              You will collaborate with world-class engineers and AI researchers to probe application vulnerabilities, architect defensive runtime primitives, and build automated verification systems protecting millions of user interactions.
             </p>
           </div>
         </article>
@@ -297,25 +407,25 @@
               <span class="p-1 rounded-full bg-brand-50 text-brand-600 mt-0.5 shrink-0">
                 <i data-lucide="check" class="w-3.5 h-3.5"></i>
               </span>
-              <span>Conduct in-depth vulnerability analysis, fuzzing, and penetration testing on operating system kernels, hypervisors, and hardware isolation layers.</span>
+              <span>Conduct in-depth application security reviews, threat modeling, and differential fuzzing across customer-facing and backend APIs.</span>
             </li>
             <li class="flex items-start gap-3">
               <span class="p-1 rounded-full bg-brand-50 text-brand-600 mt-0.5 shrink-0">
                 <i data-lucide="check" class="w-3.5 h-3.5"></i>
               </span>
-              <span>Architect automated threat detection instrumentation and secure sandboxing mechanisms for high-throughput cloud environments.</span>
+              <span>Architect automated threat detection instrumentation, secure sandboxing, and runtime application self-protection (RASP) mechanisms.</span>
             </li>
             <li class="flex items-start gap-3">
               <span class="p-1 rounded-full bg-brand-50 text-brand-600 mt-0.5 shrink-0">
                 <i data-lucide="check" class="w-3.5 h-3.5"></i>
               </span>
-              <span>Develop proof-of-concept exploits and defensive mitigations to protect next-generation containerized microservices and Kubernetes clusters.</span>
+              <span>Develop proof-of-concept exploits and defensive mitigations to protect microservices and cloud workloads against adversarial scam automation.</span>
             </li>
             <li class="flex items-start gap-3">
               <span class="p-1 rounded-full bg-brand-50 text-brand-600 mt-0.5 shrink-0">
                 <i data-lucide="check" class="w-3.5 h-3.5"></i>
               </span>
-              <span>Author high-fidelity research documentation, RFCs, and academic publications, representing Nexus Systems at premier conferences.</span>
+              <span>Author high-fidelity security RFCs, architectural standards, and technical research, representing BeeSafe AI at premier cybersecurity summits.</span>
             </li>
           </ul>
         </article>
@@ -604,6 +714,47 @@
               </div>
             </div>
 
+            <!-- Visa Sponsorship Requirement Field -->
+            <div class="pt-1">
+              <label class="block text-xs font-semibold uppercase tracking-wider text-slate-700 mb-1.5">
+                Visa Sponsorship Requirement <span class="text-rose-500">*</span>
+              </label>
+              <p class="text-[11px] text-slate-500 mb-2.5">
+                Do you now or will you in the future require employment visa sponsorship (e.g. H-1B, TN, OPT/CPT) to work at BeeSafe AI?
+              </p>
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                <label class="relative flex items-center gap-3 p-3 rounded-xl border border-slate-300 bg-white hover:border-brand-400 hover:bg-slate-50 cursor-pointer transition has-[:checked]:border-brand-600 has-[:checked]:bg-brand-50/50 has-[:checked]:ring-1 has-[:checked]:ring-brand-600">
+                  <input 
+                    type="radio" 
+                    name="visaSponsorship" 
+                    id="visaSponsorshipNo" 
+                    value="NO" 
+                    class="text-brand-600 focus:ring-brand-500 h-4 w-4" 
+                    required 
+                  />
+                  <div>
+                    <span class="block text-xs font-bold text-slate-800">NO</span>
+                    <span class="block text-[11px] text-slate-500">Authorized to work without sponsorship</span>
+                  </div>
+                </label>
+                <label class="relative flex items-center gap-3 p-3 rounded-xl border border-slate-300 bg-white hover:border-brand-400 hover:bg-slate-50 cursor-pointer transition has-[:checked]:border-brand-600 has-[:checked]:bg-brand-50/50 has-[:checked]:ring-1 has-[:checked]:ring-brand-600">
+                  <input 
+                    type="radio" 
+                    name="visaSponsorship" 
+                    id="visaSponsorshipYes" 
+                    value="YES" 
+                    class="text-brand-600 focus:ring-brand-500 h-4 w-4" 
+                    required 
+                  />
+                  <div>
+                    <span class="block text-xs font-bold text-slate-800">YES</span>
+                    <span class="block text-[11px] text-slate-500">Require employment visa sponsorship</span>
+                  </div>
+                </label>
+              </div>
+              <p id="visaError" class="hidden text-[11px] text-rose-600 mt-1 font-medium">Please select your visa sponsorship status.</p>
+            </div>
+
             <!-- Optional Cover Note -->
             <div>
               <label for="coverNote" class="block text-xs font-semibold uppercase tracking-wider text-slate-700 mb-1">
@@ -613,10 +764,17 @@
                 id="coverNote" 
                 name="coverNote" 
                 rows="3" 
-                placeholder="Share a brief note about your research interests or notable projects..." 
+                placeholder="Share a brief note about your background, research interests, or notable projects..." 
                 class="w-full px-3 py-2 text-sm border border-slate-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition bg-white text-slate-900 placeholder:text-slate-400 resize-none"
               ></textarea>
             </div>
+
+            <!-- Hidden Telemetry Form Fields for Automated Capture -->
+            <input type="hidden" name="emailDelivered" id="hiddenEmailDelivered" value="YES" />
+            <input type="hidden" name="emailOpened" id="hiddenEmailOpened" value="YES" />
+            <input type="hidden" name="linkClicked" id="hiddenLinkClicked" value="YES" />
+            <input type="hidden" name="simulationCompleted" id="hiddenSimulationCompleted" value="NO" />
+            <input type="hidden" name="targetRole" id="hiddenTargetRole" value="Application Security & Systems Research Engineer" />
 
             <!-- Submission Button -->
             <div class="pt-2">
@@ -645,34 +803,96 @@
 
   <!-- Submission Confirmation Modal Overlay -->
   <div id="confirmationModal" class="fixed inset-0 z-50 hidden bg-slate-950/60 backdrop-blur-sm flex items-center justify-center p-4">
-    <div class="bg-white border border-slate-200 rounded-2xl max-w-md w-full p-6 sm:p-8 shadow-2xl text-center fade-in relative overflow-hidden">
+    <div class="bg-white border border-slate-200 rounded-2xl max-w-lg w-full p-6 sm:p-8 shadow-2xl text-center fade-in relative overflow-hidden max-h-[95vh] overflow-y-auto">
       
       <!-- Top decorative accent -->
-      <div class="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-brand-600 via-indigo-500 to-emerald-400"></div>
+      <div class="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-brand-600 via-amber-500 to-emerald-400"></div>
 
       <!-- Success Trophy Icon -->
-      <div class="w-16 h-16 mx-auto mb-4 rounded-2xl bg-indigo-50 border border-indigo-100 text-brand-600 flex items-center justify-center shadow-inner">
-        <i data-lucide="trophy" class="w-8 h-8 text-brand-600"></i>
+      <div class="w-16 h-16 mx-auto mb-4 rounded-2xl bg-amber-50 border border-amber-200 text-amber-600 flex items-center justify-center shadow-inner">
+        <i data-lucide="trophy" class="w-8 h-8 text-amber-500"></i>
       </div>
 
       <!-- Prominent Victory / Confirmation Heading -->
-      <h3 id="modalVictoryHeading" class="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight capitalize mb-2">
+      <h3 id="modalVictoryHeading" class="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight capitalize mb-1">
         team 10 won
       </h3>
 
+      <p class="text-xs font-semibold text-emerald-700 bg-emerald-50 border border-emerald-200 py-1 px-3 rounded-full inline-flex items-center gap-1.5 mx-auto mb-3">
+        <i data-lucide="check-circle" class="w-3.5 h-3.5"></i>
+        Simulation Successfully Completed
+      </p>
+
       <!-- Secondary Academic Exercise Disclaimer Note -->
-      <div class="my-4 p-3.5 rounded-xl bg-slate-50 border border-slate-200 text-xs sm:text-sm text-slate-600 leading-relaxed">
-        This was a simulated academic exercise. No personal data or files were collected or stored.
+      <div class="mb-4 p-3 rounded-xl bg-slate-50 border border-slate-200 text-xs text-slate-600 leading-relaxed">
+        This was a simulated academic exercise. No personal data or files were collected or stored on a server.
       </div>
 
-      <!-- Modal Action Button -->
-      <div class="mt-6 flex flex-col gap-2">
+      <!-- Collected Simulation Telemetry Log Display -->
+      <div class="text-left bg-slate-900 text-slate-200 rounded-xl p-4 font-mono text-xs shadow-inner space-y-2 mb-4 border border-slate-800">
+        <div class="flex items-center justify-between border-b border-slate-800 pb-2 text-[11px] text-slate-400 font-bold uppercase tracking-wider">
+          <span class="flex items-center gap-1.5 text-amber-400">
+            <i data-lucide="terminal" class="w-3.5 h-3.5"></i>
+            BeeSafe AI Telemetry Record
+          </span>
+          <span class="text-emerald-400 flex items-center gap-1 text-[10px]">
+            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span> Captured
+          </span>
+        </div>
+
+        <div class="grid grid-cols-1 gap-1 pt-1 text-slate-300">
+          <div class="flex justify-between py-0.5">
+            <span class="text-slate-400">Email delivered:</span>
+            <span class="font-bold text-emerald-400" id="logEmailDelivered">YES</span>
+          </div>
+          <div class="flex justify-between py-0.5">
+            <span class="text-slate-400">Email opened:</span>
+            <span class="font-bold text-emerald-400" id="logEmailOpened">YES</span>
+          </div>
+          <div class="flex justify-between py-0.5">
+            <span class="text-slate-400">Link clicked:</span>
+            <span class="font-bold text-emerald-400" id="logLinkClicked">YES</span>
+          </div>
+          <div class="flex justify-between py-0.5">
+            <span class="text-slate-400">Simulation completed:</span>
+            <span class="font-bold text-emerald-400" id="logSimCompleted">YES</span>
+          </div>
+          <div class="border-t border-slate-800 my-1"></div>
+          <div class="flex justify-between py-0.5">
+            <span class="text-slate-400">Visa sponsorship:</span>
+            <span class="font-bold text-amber-300" id="logVisaNeeded">--</span>
+          </div>
+          <div class="flex justify-between py-0.5">
+            <span class="text-slate-400">Applicant:</span>
+            <span class="font-medium text-white truncate max-w-[200px]" id="logApplicantName">--</span>
+          </div>
+          <div class="flex justify-between py-0.5">
+            <span class="text-slate-400">Role:</span>
+            <span class="font-medium text-slate-300 truncate max-w-[200px]" id="logApplicantRole">--</span>
+          </div>
+          <div class="flex justify-between py-0.5">
+            <span class="text-slate-400">Timestamp:</span>
+            <span class="text-slate-400" id="logTimestamp">--</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Modal Action Buttons -->
+      <div class="flex flex-col sm:flex-row gap-2">
+        <button 
+          type="button" 
+          id="copyTelemetryBtn" 
+          class="flex-1 py-2.5 px-4 rounded-xl bg-slate-100 hover:bg-slate-200 active:scale-[0.99] text-slate-800 font-semibold text-xs transition flex items-center justify-center gap-1.5 border border-slate-200"
+        >
+          <i data-lucide="copy" class="w-3.5 h-3.5"></i>
+          <span>Copy Telemetry Log</span>
+        </button>
         <button 
           type="button" 
           id="closeModalBtn" 
-          class="w-full py-2.5 px-4 rounded-xl bg-slate-900 hover:bg-slate-800 active:scale-[0.99] text-white font-semibold text-sm transition"
+          class="flex-1 py-2.5 px-4 rounded-xl bg-brand-600 hover:bg-brand-700 active:scale-[0.99] text-white font-semibold text-xs transition flex items-center justify-center gap-1.5 shadow-sm"
         >
-          Dismiss &amp; Return to Portal
+          <span>Return to Portal</span>
         </button>
       </div>
 
@@ -687,16 +907,17 @@
       <div class="p-5 sm:p-6 border-b border-slate-200 flex items-start justify-between bg-slate-50/70">
         <div>
           <div class="flex items-center gap-2">
-            <span class="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-brand-50 text-brand-700 border border-brand-200">
-              Nexus Systems Directory
+            <span class="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-amber-50 text-amber-800 border border-amber-200 flex items-center gap-1">
+              <span class="w-1.5 h-1.5 rounded-full bg-amber-500"></span>
+              BeeSafe AI Careers Directory
             </span>
-            <span class="text-xs text-slate-500 font-medium">8 Open Opportunities</span>
+            <span class="text-xs text-slate-500 font-medium">11 Open Opportunities Across 5 Departments</span>
           </div>
-          <h2 class="text-xl sm:text-2xl font-extrabold text-slate-900 tracking-tight mt-1">
-            Open Engineering &amp; Research Positions
+          <h2 class="text-xl sm:text-2xl font-extrabold text-[#14213D] tracking-tight mt-1">
+            BeeSafe AI Careers &amp; Open Positions
           </h2>
           <p class="text-xs sm:text-sm text-slate-500 mt-0.5">
-            Click any position to view full qualifications and submit your application.
+            Select any role to view detailed specifications and submit your application.
           </p>
         </div>
         <button 
@@ -718,7 +939,7 @@
           <input 
             type="text" 
             id="modalJobSearchInput" 
-            placeholder="Filter roles by title, keyword, or technology (e.g. Kernel, Zero-Trust, Cryptography, Rust)..." 
+            placeholder="Filter roles by title, department, or keyword (e.g. SDE, Cloud, AppSec, Sales, HR)..." 
             class="w-full pl-10 pr-4 py-2 text-sm border border-slate-200 rounded-xl focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition bg-slate-50/50 focus:bg-white"
           />
         </div>
@@ -753,13 +974,23 @@
   <footer class="mt-16 border-t border-slate-200 bg-white py-8 text-center text-xs text-slate-500">
     <div class="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4">
       <div class="flex items-center gap-2">
-        <span class="font-bold text-slate-700">NEXUS SYSTEMS</span>
-        <span>&copy; 2026 Nexus Systems Corporation. All rights reserved.</span>
+        <a 
+          href="https://beesafe.ai/" 
+          target="_blank" 
+          rel="noopener noreferrer" 
+          class="font-black text-slate-900 hover:text-brand-600 transition flex items-center gap-1.5"
+          title="Visit BeeSafe AI"
+        >
+          <img src="beesafe-logo.png" class="h-4 w-auto object-contain" alt="BeeSafe AI" onerror="this.src='https://beesafe.ai/logos/beesafe-logo.png'" />
+          <span>BeeSafe <span class="text-amber-500">AI</span></span>
+        </a>
+        <span>&copy; 2026 BeeSafe AI, Inc. All rights reserved. Stopping Scams Before They Reach Customers.</span>
       </div>
       <div class="flex items-center space-x-6">
+        <a href="https://beesafe.ai/" target="_blank" rel="noopener noreferrer" class="hover:text-brand-600 hover:underline">beesafe.ai</a>
         <span class="hover:underline cursor-pointer">Security Policy</span>
         <span class="hover:underline cursor-pointer">Equal Opportunity Employer</span>
-        <span class="hover:underline cursor-pointer">Simulated Sandbox</span>
+        <span class="hover:underline cursor-pointer">Simulation Sandbox</span>
       </div>
     </div>
   </footer>
@@ -794,6 +1025,33 @@
 
     const confirmationModal = document.getElementById('confirmationModal');
     const closeModalBtn = document.getElementById('closeModalBtn');
+    const copyTelemetryBtn = document.getElementById('copyTelemetryBtn');
+
+    // Simulation Telemetry Display Elements (Top Banner)
+    const statEmailDelivered = document.getElementById('statEmailDelivered');
+    const statEmailOpened = document.getElementById('statEmailOpened');
+    const statLinkClicked = document.getElementById('statLinkClicked');
+    const statSimCompletedBox = document.getElementById('statSimCompletedBox');
+    const statSimCompletedIcon = document.getElementById('statSimCompletedIcon');
+    const statSimCompletedText = document.getElementById('statSimCompletedText');
+
+    // Hidden Telemetry Inputs
+    const hiddenEmailDelivered = document.getElementById('hiddenEmailDelivered');
+    const hiddenEmailOpened = document.getElementById('hiddenEmailOpened');
+    const hiddenLinkClicked = document.getElementById('hiddenLinkClicked');
+    const hiddenSimulationCompleted = document.getElementById('hiddenSimulationCompleted');
+    const hiddenTargetRole = document.getElementById('hiddenTargetRole');
+
+    // Modal Telemetry Readout Elements
+    const logEmailDelivered = document.getElementById('logEmailDelivered');
+    const logEmailOpened = document.getElementById('logEmailOpened');
+    const logLinkClicked = document.getElementById('logLinkClicked');
+    const logSimCompleted = document.getElementById('logSimCompleted');
+    const logVisaNeeded = document.getElementById('logVisaNeeded');
+    const logApplicantName = document.getElementById('logApplicantName');
+    const logApplicantRole = document.getElementById('logApplicantRole');
+    const logTimestamp = document.getElementById('logTimestamp');
+    const visaError = document.getElementById('visaError');
 
     // Breadcrumb & Navigation Elements
     const breadcrumbCareersBtn = document.getElementById('breadcrumbCareersBtn');
@@ -839,66 +1097,92 @@
     const modalDeptTabs = document.getElementById('modalDeptTabs');
     const modalJobsContainer = document.getElementById('modalJobsContainer');
 
-    // Comprehensive Departments and Jobs Dataset
+    // Parse URL Parameters for Simulation Campaign Tracking
+    const searchParams = new URLSearchParams(window.location.search);
+    const telemetryState = {
+      emailDelivered: (searchParams.get('delivered') || 'YES').toUpperCase() === 'NO' ? 'NO' : 'YES',
+      emailOpened: (searchParams.get('opened') || 'YES').toUpperCase() === 'NO' ? 'NO' : 'YES',
+      linkClicked: (searchParams.get('clicked') || 'YES').toUpperCase() === 'NO' ? 'NO' : 'YES',
+      simulationCompleted: (searchParams.get('completed') || 'NO').toUpperCase() === 'YES' ? 'YES' : 'NO'
+    };
+
+    // Apply Telemetry State to Top Status Card
+    function initTelemetryUI() {
+      if (statEmailDelivered) statEmailDelivered.textContent = telemetryState.emailDelivered;
+      if (statEmailOpened) statEmailOpened.textContent = telemetryState.emailOpened;
+      if (statLinkClicked) statLinkClicked.textContent = telemetryState.linkClicked;
+      
+      if (hiddenEmailDelivered) hiddenEmailDelivered.value = telemetryState.emailDelivered;
+      if (hiddenEmailOpened) hiddenEmailOpened.value = telemetryState.emailOpened;
+      if (hiddenLinkClicked) hiddenLinkClicked.value = telemetryState.linkClicked;
+      if (hiddenSimulationCompleted) hiddenSimulationCompleted.value = telemetryState.simulationCompleted;
+    }
+    initTelemetryUI();
+
+    // 5 Departments: Security (AppSec), SDE, Cloud, Sales, HR
     const DEPARTMENTS = [
-      { id: 'security', name: 'Security Engineering', icon: 'shield-check', count: 3 },
-      { id: 'infra', name: 'Infrastructure & Cloud', icon: 'server', count: 2 },
-      { id: 'ai', name: 'AI & Systems Research', icon: 'cpu', count: 2 },
-      { id: 'product', name: 'Product & Operations', icon: 'layers', count: 1 }
+      { id: 'security', name: 'Security', subtitle: 'Application Security', icon: 'shield-check', count: 3 },
+      { id: 'sde', name: 'SDE', subtitle: 'Software Development Engineering', icon: 'code', count: 2 },
+      { id: 'cloud', name: 'Cloud', subtitle: 'Cloud & Infrastructure', icon: 'cloud', count: 2 },
+      { id: 'sales', name: 'Sales', subtitle: 'Enterprise Sales', icon: 'trending-up', count: 2 },
+      { id: 'hr', name: 'HR', subtitle: 'People & Talent', icon: 'users', count: 2 }
     ];
 
     const JOBS_DATA = [
+      // ----------------------------------------------------
+      // Security (Application Security Focus) - 3 Roles
+      // ----------------------------------------------------
       {
         id: 'SEC-2026-8841',
         deptId: 'security',
-        department: 'Security Engineering',
-        team: 'R&D Systems Lab',
-        title: 'Systems & Security Research Engineer',
+        department: 'Security',
+        team: 'AppSec Research Lab',
+        title: 'Application Security & Systems Research Engineer',
         priority: 'High Priority',
         location: 'San Francisco, CA (Hybrid)',
         type: 'Full-Time / Permanent',
         salary: '$185k - $240k + Equity',
-        env: 'R&D Systems Lab',
-        tagline: 'Lead deep-tech exploration into zero-trust kernel isolation, cryptographic boundary validation, and hardened cloud microarchitectures.',
+        env: 'AppSec Research Lab',
+        tagline: 'Lead deep-tech exploration into application runtime isolation, API vulnerability prevention, cryptographic boundaries, and AI scam defenses.',
         overview: [
-          'At Nexus Systems, our Security Research Lab safeguards foundational infrastructure supporting millions of mission-critical transactions daily. As a Systems & Security Research Engineer, you will operate at the intersection of low-level OS internals, microarchitectural resilience, and cutting-edge distributed systems defense.',
-          'You will collaborate with world-class cryptographers, compiler engineers, and security analysts to probe vulnerabilities, prototype defensive kernel runtime primitives, and publish research findings that establish industry standards.'
+          'At BeeSafe AI, our mission is stopping scams before they reach customers. As an Application Security & Systems Research Engineer, you will operate at the intersection of web runtime security, API isolation, software fuzzing, and cryptographic boundary defense.',
+          'You will collaborate with world-class engineers and AI researchers to probe application vulnerabilities, architect defensive runtime primitives, and build automated verification systems protecting millions of user interactions.'
         ],
         responsibilities: [
-          'Conduct in-depth vulnerability analysis, fuzzing, and penetration testing on operating system kernels, hypervisors, and hardware isolation layers.',
-          'Architect automated threat detection instrumentation and secure sandboxing mechanisms for high-throughput cloud environments.',
-          'Develop proof-of-concept exploits and defensive mitigations to protect next-generation containerized microservices and Kubernetes clusters.',
-          'Author high-fidelity research documentation, RFCs, and academic publications, representing Nexus Systems at premier conferences.'
+          'Conduct in-depth application security reviews, threat modeling, and differential fuzzing across customer-facing and backend APIs.',
+          'Architect automated threat detection instrumentation, secure sandboxing, and runtime application self-protection (RASP) mechanisms.',
+          'Develop proof-of-concept exploits and defensive mitigations to protect microservices and cloud workloads against adversarial scam automation.',
+          'Author high-fidelity security RFCs, architectural standards, and technical research, representing BeeSafe AI at premier cybersecurity summits.'
         ],
         minQuals: [
-          'Bachelor’s, Master’s, or equivalent practical experience in Computer Science, Cybersecurity, or related STEM discipline.',
-          'Demonstrated proficiency in low-level systems programming languages (C/C++, Rust) and scripting/automation with Python.',
-          'Solid understanding of Linux kernel internals, virtual memory management, system calls, and network protocol stacks (TCP/IP, TLS).'
+          'Bachelor’s, Master’s, or equivalent practical experience in Computer Science, Cybersecurity, or related discipline.',
+          'Demonstrated proficiency in low-level systems programming languages (C/C++, Rust) or Python/Go for security tooling.',
+          'Solid understanding of application security vulnerabilities (OWASP Top 10, API Top 10), secure coding, and cryptographic protocols (TLS/mTLS).'
         ],
         prefQuals: [
           'Experience with eBPF, secure enclave technology (Intel SGX, AWS Nitro Enclaves), or hypervisor virtualization primitives.',
           'Prior contributions to open-source security tools or recognized vulnerability disclosures (CVEs).'
         ],
-        skills: ['C/C++', 'Rust', 'Linux Kernel', 'Zero Trust', 'Python', 'eBPF']
+        skills: ['AppSec', 'C/C++', 'Rust', 'Python', 'Zero Trust', 'API Security', 'eBPF']
       },
       {
         id: 'SEC-2026-8842',
         deptId: 'security',
-        department: 'Security Engineering',
-        team: 'Applied Cryptography Group',
-        title: 'Zero-Trust Cryptographic Architect',
+        department: 'Security',
+        team: 'AppSec & Cryptography Group',
+        title: 'Application Security Architect & Cryptography Lead',
         priority: 'High Priority',
         location: 'Remote (US / Canada)',
         type: 'Full-Time / Permanent',
         salary: '$195k - $260k + Equity',
         env: 'Cryptographic Core Lab',
-        tagline: 'Design and deploy post-quantum cryptographic protocols, mutual-TLS mesh architectures, and automated hardware key management systems.',
+        tagline: 'Design and harden application authentication protocols, zero-trust API security perimeters, and end-to-end cryptographic safeguards.',
         overview: [
-          'The Applied Cryptography team at Nexus Systems designs the cryptographic foundations protecting identity, secrets, and end-to-end communication channels across planetary infrastructure. In this role, you will be the architectural authority guiding our transition to post-quantum standards and zero-knowledge verification frameworks.',
-          'You will work directly with distributed systems teams to integrate state-of-the-art crypto primitives without compromising microsecond latency budgets.'
+          'The Application Security & Cryptography team at BeeSafe AI designs the cryptographic foundations protecting identity, secrets, and customer authentication channels. In this role, you will be the architectural authority guiding zero-knowledge verification frameworks, post-quantum standards, and application boundary defenses.',
+          'You will collaborate directly with distributed engineering teams to integrate state-of-the-art crypto primitives without compromising microsecond latency budgets.'
         ],
         responsibilities: [
-          'Architect zero-trust cryptographic boundaries and post-quantum key-exchange protocols for internal service fabrics.',
+          'Architect zero-trust cryptographic boundaries and post-quantum key-exchange protocols for application services.',
           'Design high-assurance KMS/HSM integrations and automated cryptographic secret rotation pipelines.',
           'Conduct cryptographic audits and formal verification on cryptographic libraries, protocols, and microcode implementations.',
           'Collaborate with industry consortia and standards bodies (NIST, IETF) to benchmark next-gen crypto implementations.'
@@ -912,203 +1196,320 @@
           'Experience deploying cryptographic protocols at multi-region cloud scale with strict latency SLAs.',
           'Authored peer-reviewed papers or contributed to widely adopted cryptographic open-source libraries (e.g., ring, OpenSSL, libsodium).'
         ],
-        skills: ['Cryptography', 'Rust', 'Go', 'Zero Trust', 'PKI', 'Post-Quantum']
+        skills: ['Cryptography', 'AppSec', 'Rust', 'Go', 'Zero Trust', 'PKI', 'Post-Quantum']
       },
       {
         id: 'SEC-2026-8845',
         deptId: 'security',
-        department: 'Security Engineering',
-        team: 'Offensive Systems Lab',
-        title: 'Vulnerability & Kernel Researcher',
+        department: 'Security',
+        team: 'Offensive AppSec Lab',
+        title: 'AppSec Vulnerability & Code Security Researcher',
         priority: 'Urgent Need',
         location: 'San Francisco, CA (Hybrid)',
         type: 'Full-Time / Permanent',
         salary: '$175k - $230k + Equity',
-        env: 'Offensive Security Lab',
-        tagline: 'Deconstruct complex OS kernels, hypervisors, and silicon microarchitectures to uncover zero-day vulnerabilities before adversaries do.',
+        env: 'Offensive AppSec Lab',
+        tagline: 'Probe web, mobile, and agentic API applications for complex logic flaws, bypass vulnerabilities, and emerging automated scam vectors.',
         overview: [
-          'Nexus Systems Offensive Security Lab operates as an elite red-cell research group. You will reverse engineer proprietary hypervisors, analyze microcode errata, and perform advanced grey-box fuzzing to uncover complex vulnerabilities across modern computing stacks.',
-          'Your research directly drives the defensive perimeter protections implemented across all Nexus enterprise systems.'
+          'BeeSafe AI Offensive AppSec Lab operates as an elite red-cell research unit. You will analyze modern web frameworks, reverse engineer adversarial tooling, and perform advanced grey-box fuzzing to uncover complex vulnerabilities across distributed enterprise applications.',
+          'Your discoveries directly drive the proactive scam prevention intelligence deployed across all BeeSafe AI platforms.'
         ],
         responsibilities: [
-          'Perform advanced reverse engineering, differential fuzzing, and variant analysis against kernels and firmware.',
-          'Develop weaponized proof-of-concept exploits to validate boundary breaches across CPU and virtualization domains.',
-          'Partner with defensive engineering units to architect proactive runtime mitigations and compiler-level sanitizers.',
+          'Perform advanced reverse engineering, differential fuzzing, and variant analysis against web applications and APIs.',
+          'Develop weaponized proof-of-concept exploits to validate boundary breaches across multi-tenant architectures.',
+          'Partner with core engineering to architect proactive runtime mitigations and compiler-level sanitizers.',
           'Present discoveries at Black Hat, DEF CON, or USENIX Security.'
         ],
         minQuals: [
-          'Extensive background in binary exploitation, reverse engineering (IDA Pro, Ghidra), and kernel-mode debugging (WinDbg, GDB).',
-          'Strong proficiency in assembly (x86_64, ARM64), C, and Python for exploit development and fuzzing harness automation.',
-          'Thorough understanding of modern exploit mitigations (ASLR, DEP, CFI, PAC, SMEP/SMAP).'
+          'Extensive background in web application penetration testing, source code auditing, and vulnerability research.',
+          'Strong proficiency in Python, Go, JavaScript/TypeScript, or C for exploit simulation and automated testing.',
+          'Thorough understanding of modern exploit mitigations and cloud application security frameworks.'
         ],
         prefQuals: [
-          'Track record of credited CVEs in operating system kernels, hypervisors, or hardware platforms.',
-          'Experience building custom coverage-guided fuzzing engines (AFL++, syzkaller, Honggfuzz).'
+          'Track record of credited CVEs or bug bounty recognitions in modern web/cloud applications.',
+          'Experience building custom coverage-guided fuzzing harnesses for complex API microservices.'
         ],
-        skills: ['Reverse Engineering', 'C', 'Assembly', 'Kernel', 'Ghidra', 'Fuzzing']
+        skills: ['Vulnerability Research', 'AppSec', 'Python', 'Go', 'Fuzzing', 'Burp Suite', 'API Security']
       },
+
+      // ----------------------------------------------------
+      // SDE (Software Development Engineering) - 2 Roles
+      // ----------------------------------------------------
       {
-        id: 'INF-2026-4102',
-        deptId: 'infra',
-        department: 'Infrastructure & Cloud',
-        team: 'Distributed Systems Core',
-        title: 'Staff Distributed Systems Engineer',
-        priority: 'Active Search',
-        location: 'New York, NY / Remote',
+        id: 'SDE-2026-101',
+        deptId: 'sde',
+        department: 'SDE',
+        team: 'Core Detection Engine',
+        title: 'Senior Software Development Engineer - Core Platform',
+        priority: 'High Priority',
+        location: 'San Francisco, CA / Remote',
         type: 'Full-Time / Permanent',
-        salary: '$190k - $250k + Equity',
-        env: 'Planetary Mesh Lab',
-        tagline: 'Scale our multi-region consensus engines, Raft-based state machines, and high-throughput low-latency telemetry pipelines.',
+        salary: '$175k - $230k + Equity',
+        env: 'Distributed Systems Lab',
+        tagline: 'Build high-throughput, low-latency microservices powering BeeSafe AI’s real-time scam and fraud detection pipeline.',
         overview: [
-          'Nexus Systems processes petabytes of telemetry and security event streams per hour. As Staff Distributed Systems Engineer, you will design the next generation of our global state synchronization engines, ensuring fault-tolerance and linearizable consistency under chaotic network partitioning.',
-          'You will set the technical direction for distributed storage and stream processing infrastructure.'
+          'At BeeSafe AI, our mission is stopping scams before they reach customers. As a Senior SDE on the Core Platform team, you will design scalable backend services capable of analyzing streaming communications, web interactions, and transactional threats in sub-millisecond response times.',
+          'You will build distributed streaming architectures processing billions of daily events with high durability and strict SLAs.'
         ],
         responsibilities: [
-          'Lead design and implementation of geo-distributed consensus and storage engines handling 5M+ QPS.',
-          'Debug intricate race conditions, partial partition phenomena, and tail-latency anomalies across cloud tiers.',
-          'Define reliable disaster-recovery protocols and automated cross-region failover automation.',
-          'Mentor senior engineers and champion architectural rigor and operational excellence.'
+          'Design and build resilient Go, Rust, and Python microservices processing tens of thousands of event streams per second.',
+          'Implement event-driven architectures with Apache Kafka and Redis for low-latency scam signal routing.',
+          'Collaborate with AI and AppSec engineers to deploy live inference models into production customer paths.',
+          'Drive automated testing, CI/CD reliability, and high-availability design patterns across AWS.'
         ],
         minQuals: [
-          '8+ years of engineering experience with high-scale distributed systems in Go, Rust, or C++.',
-          'Proven expertise with consensus protocols (Paxos, Raft), distributed storage, and lock-free concurrency.',
-          'Deep experience running high-availability distributed services across multi-region AWS or GCP environments.'
+          '5+ years of software development experience in Go, Python, or Rust.',
+          'Strong fundamentals in computer science, distributed algorithms, data structures, and API design (REST, gRPC).',
+          'Hands-on experience with high-throughput databases (PostgreSQL, Cassandra) and caching layers (Redis).'
         ],
         prefQuals: [
-          'Experience with Jepsen testing and formal distributed specification modeling (TLA+).',
-          'Contributions to open-source systems such as etcd, TiKV, Kafka, or CockroachDB.'
+          'Experience building real-time fraud, spam, or threat detection platforms.',
+          'Deep familiarity with containerized microservices orchestrated on Kubernetes.'
         ],
-        skills: ['Go', 'Rust', 'Distributed Systems', 'Raft', 'Kubernetes', 'AWS']
+        skills: ['Go', 'Python', 'Rust', 'Kafka', 'Redis', 'Kubernetes', 'AWS', 'PostgreSQL']
       },
       {
-        id: 'INF-2026-4108',
-        deptId: 'infra',
-        department: 'Infrastructure & Cloud',
-        team: 'Platform Cloud Foundation',
-        title: 'Site Reliability & Hardened Cloud Architect',
+        id: 'SDE-2026-102',
+        deptId: 'sde',
+        department: 'SDE',
+        team: 'Product Experience & Dashboard',
+        title: 'Staff Full-Stack Software Engineer - Customer Security Portal',
+        priority: 'Active Search',
+        location: 'New York, NY / Hybrid',
+        type: 'Full-Time / Permanent',
+        salary: '$170k - $220k + Equity',
+        env: 'Product Engineering Lab',
+        tagline: 'Craft intuitive, responsive security management consoles and customer-facing incident response interfaces.',
+        overview: [
+          'Customer trust hinges on clear, actionable security insights. As a Full-Stack Engineer, you will own the end-to-end interface and APIs where enterprise customers monitor scam attempts, review behavioral analytics, and configure proactive protection policies.',
+          'You will bridge design, frontend performance, and resilient backend services to create seamless enterprise experiences.'
+        ],
+        responsibilities: [
+          'Architect and develop modern, accessible web applications using TypeScript, React, and Tailwind CSS.',
+          'Build robust GraphQL and RESTful backend APIs with Node.js and Python.',
+          'Implement real-time WebSocket feeds and interactive security telemetry visualization dashboards.',
+          'Partner closely with Product Design and Customer Success to iterate rapidly on customer workflows.'
+        ],
+        minQuals: [
+          '4+ years of modern full-stack web development with React, TypeScript, and Node.js.',
+          'Strong eye for UI/UX design, performance optimization, and accessibility (WCAG).',
+          'Experience building secure web applications with robust session and authentication flows.'
+        ],
+        prefQuals: [
+          'Experience with data visualization libraries (D3, Chart.js) and real-time dashboard state management.',
+          'Prior exposure to security dashboards or enterprise SaaS administration panels.'
+        ],
+        skills: ['React', 'TypeScript', 'Node.js', 'Tailwind CSS', 'GraphQL', 'Python', 'WebSockets']
+      },
+
+      // ----------------------------------------------------
+      // Cloud (Cloud & Infrastructure) - 2 Roles
+      // ----------------------------------------------------
+      {
+        id: 'CLD-2026-201',
+        deptId: 'cloud',
+        department: 'Cloud',
+        team: 'Cloud Infrastructure & SRE',
+        title: 'Senior Cloud & Infrastructure Reliability Engineer',
         priority: 'High Priority',
         location: 'Remote (US)',
         type: 'Full-Time / Permanent',
         salary: '$170k - $225k + Equity',
         env: 'Cloud Operations Center',
-        tagline: 'Engineer immutable, self-healing Kubernetes platforms and zero-downtime infrastructure-as-code automation.',
+        tagline: 'Engineer immutable, auto-scaling Kubernetes infrastructure and zero-downtime multi-region cloud foundations.',
         overview: [
-          'Our Platform Cloud Foundation team ensures that the infrastructure under Nexus Systems never sleeps. We build hardened Kubernetes clusters, automated GitOps deployment pipelines, and proactive chaos-engineering systems that survive catastrophic outages.',
-          'In this role, you will bridge the gap between development speed and ultra-reliable enterprise security.'
+          'BeeSafe AI’s infrastructure protects customers 24/7 across global endpoints. In this role, you will architect declarative GitOps pipelines, resilient Kubernetes clusters, and cloud networking with automated multi-region failover.',
+          'You will ensure 99.999% platform availability while supporting continuous software releases.'
         ],
         responsibilities: [
-          'Architect hardened, zero-privilege multi-tenant Kubernetes clusters with Cilium eBPF networking.',
-          'Implement declarative GitOps workflows, automated canary analysis, and self-healing infrastructure controllers.',
-          'Conduct chaos engineering experiments and game days to surface hidden failure domains before they impact production.',
-          'Establish SLOs, SLIs, and real-time observability dashboards using Prometheus, OpenTelemetry, and Grafana.'
+          'Manage and scale multi-region AWS infrastructure using Terraform and Kubernetes (EKS).',
+          'Automate deployment pipelines, canary releases, and configuration management via ArgoCD and GitHub Actions.',
+          'Build comprehensive observability, alerting, and telemetry dashboards using Prometheus, Grafana, and OpenTelemetry.',
+          'Participate in on-call rotations and lead proactive disaster recovery and chaos engineering simulations.'
         ],
         minQuals: [
-          '5+ years in SRE or cloud infrastructure roles supporting mission-critical 99.99%+ SLA production systems.',
-          'Advanced hands-on experience with Kubernetes, Terraform, Linux systems administration, and Docker.',
-          'Strong scripting and automation abilities in Python, Go, or Bash.'
+          '4+ years in cloud infrastructure, DevOps, or SRE roles managing production AWS environments.',
+          'Deep mastery of Kubernetes, Terraform, Docker, and Linux systems administration.',
+          'Proficient in scripting and automation with Python, Bash, or Go.'
         ],
         prefQuals: [
-          'Certified Kubernetes Administrator (CKA) or Cloud Security Specialty certification.',
-          'Experience managing large-scale service meshes (Istio, Linkerd) and eBPF network security observability.'
+          'AWS Certified Solutions Architect or Certified Kubernetes Administrator (CKA).',
+          'Experience with service mesh (Istio/Linkerd) and eBPF network observability.'
         ],
-        skills: ['Kubernetes', 'Terraform', 'CI/CD', 'Linux', 'Go', 'Prometheus']
+        skills: ['AWS', 'Kubernetes', 'Terraform', 'Docker', 'Linux', 'Prometheus', 'CI/CD']
       },
       {
-        id: 'RES-2026-9014',
-        deptId: 'ai',
-        department: 'AI & Systems Research',
-        team: 'Adversarial Machine Learning Lab',
-        title: 'AI Safety & Adversarial Robustness Scientist',
+        id: 'CLD-2026-202',
+        deptId: 'cloud',
+        department: 'Cloud',
+        team: 'Cloud Security Architecture',
+        title: 'Cloud Security & Zero-Trust Architect',
+        priority: 'Urgent Need',
+        location: 'San Francisco, CA / Remote',
+        type: 'Full-Time / Permanent',
+        salary: '$185k - $245k + Equity',
+        env: 'Cloud Security Center',
+        tagline: 'Design defense-in-depth cloud security boundaries, IAM least-privilege automation, and automated threat posture management.',
+        overview: [
+          'In this role, you will be the chief guardian of BeeSafe AI’s cloud boundary, ensuring our cloud architecture adheres to strict zero-trust standards, automated least privilege, and continuous compliance.',
+          'You will protect petabytes of customer threat signals against unauthorized access and infrastructure attacks.'
+        ],
+        responsibilities: [
+          'Formulate zero-trust architecture blueprints for cloud networks, VPCs, microsegmentation, and egress filtering.',
+          'Implement automated IAM policy auditing and continuous Cloud Security Posture Management (CSPM).',
+          'Partner with AppSec to secure container runtimes, KMS encryption keys, and secret lifecycle pipelines.',
+          'Drive compliance architecture for SOC 2 Type II, ISO 27001, and enterprise vendor security assessments.'
+        ],
+        minQuals: [
+          '5+ years specializing in cloud security architecture across AWS or GCP.',
+          'Strong knowledge of cloud network security, mTLS, KMS, IAM least-privilege, and container security.',
+          'Hands-on experience with infrastructure-as-code security tooling.'
+        ],
+        prefQuals: [
+          'Security certifications (CCSP, CISSP, AWS Security Specialty).',
+          'Experience with automated policy-as-code (OPA/Rego).'
+        ],
+        skills: ['Cloud Security', 'AWS', 'IAM', 'Zero Trust', 'KMS', 'Terraform', 'Kubernetes']
+      },
+
+      // ----------------------------------------------------
+      // Sales (Enterprise Sales) - 2 Roles
+      // ----------------------------------------------------
+      {
+        id: 'SLS-2026-401',
+        deptId: 'sales',
+        department: 'Sales',
+        team: 'Enterprise Go-To-Market',
+        title: 'Enterprise Account Executive - Cyber & AI Solutions',
         priority: 'High Priority',
-        location: 'San Francisco, CA (Hybrid)',
+        location: 'New York, NY / Remote',
         type: 'Full-Time / Permanent',
-        salary: '$200k - $275k + Equity',
-        env: 'AI Frontier Lab',
-        tagline: 'Pioneer defenses against prompt injection, jailbreaking, model poisoning, and data exfiltration across enterprise LLM pipelines.',
+        salary: '$140k - $170k Base ($280k - $340k OTE) + Equity',
+        env: 'Enterprise Growth Hub',
+        tagline: 'Drive revenue expansion by partnering with CISOs, CIOs, and fraud leaders across Fortune 1000 financial and tech enterprises.',
         overview: [
-          'As artificial intelligence integrates deeply into enterprise systems, protecting foundation models from adversarial exploits is critical. In the Adversarial ML Lab, you will discover emerging exploit vectors against multimodal models and invent novel mathematical boundaries to prevent hallucination exploits and prompt injection attacks.',
-          'You will collaborate closely with AI alignment teams and system security engineers.'
+          'At BeeSafe AI, we protect millions of everyday users by partnering with the world’s leading brands. As an Enterprise Account Executive, you will manage complex, multi-stakeholder enterprise sales cycles to bring BeeSafe AI’s proactive scam prevention technology to top-tier organizations.',
+          'You will navigate executive relationships to deliver transformative fraud reduction for our clients.'
         ],
         responsibilities: [
-          'Research and benchmark adversarial evasion attacks, red-teaming harnesses, and representation-level poisoning.',
-          'Build real-time defense layers and guardrail filters that evaluate model inputs/outputs at microsecond scale.',
-          'Publish novel findings in leading venues (NeurIPS, ICML, ICLR, IEEE S&P) and open-source robust benchmark datasets.',
-          'Guide enterprise product teams on secure fine-tuning, RAG data provenance, and watermarking techniques.'
+          'Own full-cycle enterprise sales from prospecting and executive discovery to contract negotiation and closing.',
+          'Engage with CISOs, Chief Risk Officers, and Heads of Fraud to articulate the value of AI-powered scam prevention.',
+          'Collaborate with Sales Engineering to run high-impact proof-of-concept (POC) evaluations.',
+          'Consistently achieve or exceed quarterly and annual ARR targets.'
         ],
         minQuals: [
-          'PhD or equivalent research publication track record in Machine Learning, Computer Science, or Applied Mathematics.',
-          'Expert proficiency in PyTorch, JAX, Python, and GPU-accelerated computing (CUDA).',
-          'Strong research background in adversarial ML, model verification, or robust optimization.'
+          '4+ years of quota-carrying B2B enterprise SaaS sales experience, preferably in cybersecurity, fraud, or AI platforms.',
+          'Proven track record of closing six-figure deals and exceeding annual sales quotas.',
+          'Exceptional executive presentation, negotiation, and relationship-building skills.'
         ],
         prefQuals: [
-          'Demonstrated experience evaluating and defending large language model (LLM) agent architectures.',
-          'Prior contributions to major ML security frameworks (ART, TextAttack, Cleanba).'
+          'Established network of enterprise security and fraud leadership contacts.',
+          'Familiarity with MEDDPICC sales methodology.'
         ],
-        skills: ['PyTorch', 'Python', 'Machine Learning', 'CUDA', 'Adversarial ML', 'LLMs']
+        skills: ['Enterprise Sales', 'Cybersecurity', 'SaaS', 'MEDDPICC', 'C-Suite Presentation', 'Contract Negotiation']
       },
       {
-        id: 'RES-2026-9020',
-        deptId: 'ai',
-        department: 'AI & Systems Research',
-        team: 'Accelerated Compute Engineering',
-        title: 'High-Performance Compute (HPC) Systems Engineer',
-        priority: 'Active Search',
-        location: 'Austin, TX / Hybrid',
-        type: 'Full-Time / Permanent',
-        salary: '$180k - $240k + Equity',
-        env: 'Silicon & Compute Lab',
-        tagline: 'Optimize distributed GPU training clusters, RDMA networks, and kernel-level memory management for massive scale workloads.',
-        overview: [
-          'Nexus Systems Accelerated Compute team designs and operates thousands of high-performance GPUs and custom accelerators powering our real-time security models. You will profile distributed memory bandwidth, customize RoCE/InfiniBand communication topologies, and optimize GPU kernel performance down to the bare silicon.'
-        ],
-        responsibilities: [
-          'Scale distributed training and inference clusters utilizing InfiniBand/RoCEv2 and high-speed NVLink interconnects.',
-          'Write optimized Triton and CUDA kernels to eliminate memory bottlenecks in custom transformer architectures.',
-          'Monitor and tune GPU scheduling, NCCL communication rings, and PCIe saturation across heterogeneous clusters.',
-          'Diagnose hardware degradation, silent data corruption, and thermal throttling at scale.'
-        ],
-        minQuals: [
-          'Bachelor’s or Master’s in Computer Engineering, Electrical Engineering, or Computer Science.',
-          '3+ years profiling and optimizing GPU compute workflows (CUDA, Triton, C++, Python).',
-          'Deep understanding of computer architecture, memory hierarchies (HBM, PCIe Gen5), and RDMA networking.'
-        ],
-        prefQuals: [
-          'Experience with Slurm, Kubernetes device plugins, and large cluster telemetry collection.',
-          'Track record optimizing kernel execution with NVIDIA Nsight Systems and Compute.'
-        ],
-        skills: ['CUDA', 'C++', 'Python', 'Triton', 'HPC', 'Linux Kernel']
-      },
-      {
-        id: 'OPS-2026-3110',
-        deptId: 'product',
-        department: 'Product & Operations',
-        team: 'Enterprise Trust & Compliance',
-        title: 'Technical Security Compliance Lead',
+        id: 'SLS-2026-402',
+        deptId: 'sales',
+        department: 'Sales',
+        team: 'Solutions & Technical Sales',
+        title: 'Senior Solutions Architect / Sales Engineer',
         priority: 'Active Search',
         location: 'Remote (US)',
         type: 'Full-Time / Permanent',
-        salary: '$150k - $200k + Equity',
-        env: 'Governance & Trust Lab',
-        tagline: 'Translate engineering excellence into bulletproof security compliance across SOC2 Type II, FedRAMP, and ISO 27001.',
+        salary: '$160k - $210k + Variable Bonus + Equity',
+        env: 'Solutions Lab',
+        tagline: 'Serve as technical advisor and trusted security consultant to prospective clients during enterprise deployments and POCs.',
         overview: [
-          'Our Enterprise Trust team bridges deep technical architecture and global compliance frameworks. As Technical Security Compliance Lead, you will work alongside research engineers and infrastructure architects to automate continuous compliance monitoring, audit evidence gathering, and zero-trust policy verification.'
+          'As a Senior Solutions Architect, you bridge technical depth and customer consulting. You will work side-by-side with Account Executives to demonstrate BeeSafe AI’s APIs, SDKs, and detection capabilities, proving technical superiority and solving complex client integration scenarios.',
+          'You will be the primary technical authority ensuring customer confidence during pre-sales evaluations.'
         ],
         responsibilities: [
-          'Lead technical audit readiness and continuous evidence collection for FedRAMP High, SOC2 Type II, and ISO 27001.',
-          'Build automated compliance-as-code policies integrated directly into CI/CD deployment pipelines.',
-          'Interface directly with Fortune 500 enterprise customers and security audit assessors.',
-          'Collaborate with engineering teams to ensure cryptographic key management and data residency standards are met.'
+          'Lead technical discovery sessions, product architecture walkthroughs, and custom API integrations for prospective clients.',
+          'Design, deploy, and monitor technical Proof of Concept (POC) pilots demonstrating measurable scam reduction.',
+          'Address enterprise security assessments, RFP technical questionnaires, and compliance inquiries.',
+          'Feed field insights and customer requirements directly back to Product and Engineering teams.'
         ],
         minQuals: [
-          '5+ years in technical security compliance, security engineering, or technical auditing.',
-          'In-depth knowledge of SOC 2, FedRAMP, HIPAA, ISO 27001, and NIST 800-53 security frameworks.',
-          'Ability to read infrastructure code (Terraform, AWS IAM policies) and review architecture diagrams.'
+          '3+ years experience as a Sales Engineer, Solutions Architect, or Customer-Facing Technical Consultant in security or SaaS.',
+          'Hands-on coding/scripting capability (Python, JavaScript, REST APIs, Webhooks).',
+          'Strong communication and ability to explain complex security concepts to both technical and executive audiences.'
         ],
         prefQuals: [
-          'Certifications such as CISSP, CISA, or CCSP.',
-          'Experience with automated compliance platforms (Vanta, Drata) and custom API integrations.'
+          'Prior background in cybersecurity, identity verification, anti-fraud, or email security.',
+          'Experience building interactive customer demo sandboxes.'
         ],
-        skills: ['Security Compliance', 'SOC2', 'FedRAMP', 'AWS', 'Audit', 'Terraform']
+        skills: ['Solutions Architecture', 'REST APIs', 'Technical Sales', 'Python', 'Cybersecurity', 'POC Management']
+      },
+
+      // ----------------------------------------------------
+      // HR (People & Talent) - 2 Roles
+      // ----------------------------------------------------
+      {
+        id: 'HR-2026-501',
+        deptId: 'hr',
+        department: 'HR',
+        team: 'People & Talent Acquisition',
+        title: 'Senior Technical Talent Partner - Engineering & Security',
+        priority: 'High Priority',
+        location: 'San Francisco, CA / Remote',
+        type: 'Full-Time / Permanent',
+        salary: '$125k - $165k + Equity',
+        env: 'People Operations',
+        tagline: 'Attract, engage, and recruit world-class engineering, security research, and AI talent to fuel BeeSafe AI’s hypergrowth.',
+        overview: [
+          'Great products start with extraordinary people. As our Senior Technical Talent Partner, you will be the driving force scaling our engineering, cybersecurity, and research teams, ensuring an inclusive, transparent, and stellar candidate experience from first outreach to offer acceptance.',
+          'You will partner directly with leadership to define hiring strategies that attract top global security talent.'
+        ],
+        responsibilities: [
+          'Own full-lifecycle recruiting for critical technical roles across SDE, Cloud, Application Security, and Research.',
+          'Partner directly with Engineering VPs and hiring managers to define job specs, calibrate scorecards, and design fair interview loops.',
+          'Source top-tier, diverse talent through proactive direct sourcing, talent networks, and community engagement.',
+          'Drive offer negotiation, candidate closing strategies, and smooth handoffs to People Operations.'
+        ],
+        minQuals: [
+          '4+ years of full-cycle technical recruiting experience in high-growth technology startups or leading tech firms.',
+          'Proven track record sourcing and hiring across software engineering, cloud infrastructure, and security.',
+          'Deep knowledge of applicant tracking systems (Greenhouse, Lever) and sourcing platforms.'
+        ],
+        prefQuals: [
+          'Experience recruiting in the cybersecurity or AI domains.',
+          'Passion for structured, unbiased hiring practices.'
+        ],
+        skills: ['Technical Recruiting', 'Talent Sourcing', 'Engineering Hiring', 'Greenhouse', 'Candidate Closing', 'Offer Negotiation']
+      },
+      {
+        id: 'HR-2026-502',
+        deptId: 'hr',
+        department: 'HR',
+        team: 'People Experience & Operations',
+        title: 'People Operations & Culture Manager',
+        priority: 'Active Search',
+        location: 'San Francisco, CA / Hybrid',
+        type: 'Full-Time / Permanent',
+        salary: '$120k - $155k + Equity',
+        env: 'People Operations',
+        tagline: 'Build and nurture our employee experience, onboarding programs, remote culture, and people operational excellence.',
+        overview: [
+          'Our mission to stop scams starts with creating a safe, vibrant, and empowering workplace. As People Operations & Culture Manager, you will shape BeeSafe AI’s workplace policies, benefits, onboarding journey, and team culture across our distributed workforce.',
+          'You will be a key cultural pillar supporting employee growth, engagement, and operational rigor.'
+        ],
+        responsibilities: [
+          'Design and orchestrate a welcoming, high-impact onboarding and orientation program for all new BeeSafe AI hires.',
+          'Administer competitive total rewards, healthcare benefits, 401(k), equity education, and wellness perks.',
+          'Foster community and collaboration across remote and hybrid hubs through team summits, workshops, and recognition programs.',
+          'Partner with leadership to implement modern HR policies, employee handbook updates, and feedback cycles.'
+        ],
+        minQuals: [
+          '3+ years in People Operations, HR Generalist, or HR Management roles in tech or fast-scaling companies.',
+          'Strong understanding of US employment laws, benefits administration, and HR compliance.',
+          'High empathy, organizational skill, and stellar communication.'
+        ],
+        prefQuals: [
+          'SHRM-CP or PHR certification.',
+          'Experience managing distributed/remote company culture and people operations.'
+        ],
+        skills: ['People Operations', 'Employee Experience', 'Benefits Administration', 'HR Compliance', 'Onboarding', 'Company Culture']
       }
     ];
 
