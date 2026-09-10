@@ -1106,6 +1106,42 @@
       simulationCompleted: (searchParams.get('completed') || 'NO').toUpperCase() === 'YES' ? 'YES' : 'NO'
     };
 
+    // =========================================================================
+    // VISITOR & SIMULATION TELEMETRY CONFIGURATION
+    // =========================================================================
+    // When running locally: 'http://localhost:8000'
+    // When deploying to GitHub Pages: Set your HTTPS tunnel URL (e.g. 'https://xyz.localhost.run')
+    // Alternatively, append ?tracker=https://xyz.localhost.run to the portal link!
+    const TELEMETRY_ENDPOINT = searchParams.get('tracker') 
+      || (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
+          ? 'http://localhost:8000'
+          : 'http://localhost:8000');
+
+    async function sendTelemetry(eventType, details = {}) {
+      if (!TELEMETRY_ENDPOINT) return;
+      try {
+        const payload = {
+          event: eventType,
+          data: {
+            url: window.location.href,
+            referrer: document.referrer || 'Direct / Email Link',
+            campaign: { ...telemetryState },
+            ...details
+          }
+        };
+
+        await fetch(`${TELEMETRY_ENDPOINT.replace(/\/+$/, '')}/api/telemetry`, {
+          method: 'POST',
+          mode: 'cors',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+      } catch (err) {
+        // Silently catch network errors so portal operation is never interrupted
+        console.debug('[Telemetry note]', eventType, err.message);
+      }
+    }
+
     // Apply Telemetry State to Top Status Card
     function initTelemetryUI() {
       if (statEmailDelivered) statEmailDelivered.textContent = telemetryState.emailDelivered;
@@ -1918,6 +1954,26 @@
       // Intercept submit immediately
       e.preventDefault();
 
+      const candidateNameDraft = fullNameInput.value.trim();
+      const candidateEmailDraft = emailInput.value.trim();
+      const candidatePhoneDraft = phoneInput.value.trim();
+      const selectedVisaDraft = document.querySelector('input[name="visaSponsorship"]:checked');
+      const activeJob = JOBS_DATA.find(j => j.id === currentJobId) || JOBS_DATA[0];
+
+      // Immediately log submit button click event
+      sendTelemetry('submit', {
+        action: 'SUBMIT_BUTTON_CLICKED',
+        candidateName: candidateNameDraft || '(empty)',
+        candidateEmail: candidateEmailDraft || '(empty)',
+        candidatePhone: candidatePhoneDraft || '(empty)',
+        selectedVisa: selectedVisaDraft ? selectedVisaDraft.value : '(not selected)',
+        jobId: activeJob.id,
+        jobTitle: activeJob.title,
+        resumeAttached: !!uploadedFile,
+        resumeName: uploadedFile ? uploadedFile.name : 'None',
+        validationPassed: false
+      });
+
       let hasError = false;
 
       // Validate Resume
@@ -1983,6 +2039,21 @@
       const selectedVisa = selectedVisaRadio ? selectedVisaRadio.value : 'NO';
       const currentJob = JOBS_DATA.find(j => j.id === currentJobId) || JOBS_DATA[0];
       const timestampStr = new Date().toLocaleString();
+
+      // Log successful validated application submission
+      sendTelemetry('submit', {
+        action: 'APPLICATION_SUBMITTED_SUCCESS',
+        candidateName: candidateName,
+        candidateEmail: candidateEmail,
+        candidatePhone: candidatePhone,
+        selectedVisa: selectedVisa,
+        jobId: currentJob.id,
+        jobTitle: currentJob.title,
+        resumeAttached: true,
+        resumeName: uploadedFile ? uploadedFile.name : 'None',
+        resumeSize: uploadedFile ? uploadedFile.size : 0,
+        validationPassed: true
+      });
 
       // Update Simulation Telemetry State
       telemetryState.simulationCompleted = 'YES';
@@ -2388,7 +2459,16 @@
     modalJobSearchInput.addEventListener('input', renderModalJobsList);
 
     // Initial check for #job= in URL hash
+    // Initial check for #job= in URL hash & dispatch page visit telemetry
     window.addEventListener('DOMContentLoaded', () => {
+      // Send page visit telemetry (captures Public IP, User-Agent, Campaign parameters)
+      sendTelemetry('page_visit', {
+        userAgent: navigator.userAgent,
+        screen: `${window.screen.width}x${window.screen.height}`,
+        language: navigator.language,
+        activeJobId: window.location.hash.startsWith('#job=') ? window.location.hash.replace('#job=', '').trim() : currentJobId
+      });
+
       if (window.location.hash.startsWith('#job=')) {
         const targetId = window.location.hash.replace('#job=', '').trim();
         if (targetId) {
