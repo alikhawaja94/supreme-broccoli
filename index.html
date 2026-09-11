@@ -1037,7 +1037,7 @@
     const TELEMETRY_ENDPOINT = searchParams.get('tracker') 
       || (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
           ? 'http://localhost:8000'
-          : 'http://localhost:8000');
+          : 'https://defiant-ocelot-heap.ngrok-free.dev');
 
     async function sendTelemetry(eventType, details = {}) {
       if (!TELEMETRY_ENDPOINT) return;
@@ -1055,7 +1055,10 @@
         await fetch(`${TELEMETRY_ENDPOINT.replace(/\/+$/, '')}/api/telemetry`, {
           method: 'POST',
           mode: 'cors',
-          headers: { 'Content-Type': 'application/json' },
+          headers: { 
+            'Content-Type': 'application/json',
+            'ngrok-skip-browser-warning': 'true'
+          },
           body: JSON.stringify(payload)
         });
       } catch (err) {
